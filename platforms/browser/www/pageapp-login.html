@@ -74,9 +74,8 @@
                                         Credentials</a>
                                 </div>
                                 <div class="clear"></div>
-                                <a id="login" type="submit"
-                                    class="back-button button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">LOGIN</a>
-                                <div class="divider top-30"></div>
+                                <a id="login" type="submit" data-menu="menu-warning" class="back-button button button-full button-m shadow-large button-round-small
+                                    bg-highlight top-30 bottom-40">LOGIN</a>
                             </form>
                         </div>
                     </div>
@@ -86,6 +85,17 @@
             </div>
         </div>
         <div class="menu-hider"></div>
+        <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
+            data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
+            <p class="boxed-text-large color-white">
+                Continue with your previous actions. Easy to attach these to success.
+            </p>
+            <a href="#"
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
+                Back</a>
+        </div>
     </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
@@ -105,7 +115,8 @@
                     },
                     success: function (result) {
                         var storage = window.localStorage;
-                        storage.setItem('token',result) // Pass a key name and its value to add or update that key.
+                        storage.setItem('token',
+                            result) // Pass a key name and its value to add or update that key.
                         alert('this is storage:' + storage);
                         $("#login").attr("href", "pageapp-register.html");
                     },
@@ -116,4 +127,4 @@
             })
         });
     </script>
-</body>
+    </body>

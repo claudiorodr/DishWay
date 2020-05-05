@@ -54,9 +54,9 @@
                     <p class="text-right color-green1-dark bottom-0"></p>
                 </div>
                 <div class="caption-center left-20">
-                    <h1 class="color-white bolder">Restaurant name</h1>
-                    <p class="under-heading color-white opacity-90 bottom-0">
-                        Type of meals
+                    <h1 id="name" class="color-white bolder"></h1>
+                    <p id="meals" class="under-heading color-white opacity-90 bottom-0">
+
                     </p>
                 </div>
                 <div class="caption-bottom text-center">
@@ -87,16 +87,16 @@
                     <div class="contact-information last-column">
                         <div class="container top-20">
                             <h5 class="bolder"><i class="fa fa-calendar-alt fa-1x"></i> Opening hours</h5>
-                            <p class="bottom-25">10h-19h everyday</p>
+                            <p id="opening" class="bottom-25"></p>
 
                             <h5 class="bolder"><i class="fas fa-info-circle color-black fa-1x"></i> Information</h5>
                             <p> informacao extra</p>
 
                             <h5 class="bolder"><i class="fa fa-phone"></i> Contacts</h5>
                             <div class="link-list link-list-1">
-                                <a href="tel:+1 234 567 8900">
+                                <a id="contact" href="tel:+1 234 567 8900">
                                     <i class="fa fa-phone color-green1-dark"></i>
-                                    <span>+1 234 567 8900</span>
+                                    <span id="contact2"></span>
                                     <em class="bg-highlight">TAP TO CALL</em>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
@@ -115,13 +115,13 @@
 
                             <br>
 
-                            <h5 class="bolder"><i class="fas fa-map-marker color-black fa-1x"></i> Postal Information</h5>
-                            
-                            <p class="bottom-25">
-                                     PO Box 22161 Street Collins East
-                                <br> PO Box 16122 Collins Street West
-                                <br> Victoria 8007 Australia
+                            <h5 class="bolder"><i class="fas fa-map-marker color-black fa-1x"></i> Postal Information
+                            </h5>
+
+                            <p id="address">
+
                             </p>
+
                             <div class="divider bottom-0"></div>
                         </div>
                     </div>
@@ -155,7 +155,8 @@
                 </div>
                 <div class="content bottom-0">
                     <div class="text-center">
-                        <a href="#" class="button button-xl shadow-large button-round-small bg-yellow1-light">View more Reviews!</a><br>
+                        <a href="#" class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
+                            Reviews!</a><br>
                     </div>
                 </div>
             </div>
@@ -174,8 +175,8 @@
                     </p>
                 </div>
                 <div class="responsive-iframe bottom-0 add-iframe">
-                    <iframe class="location-map"
-                        src='https://maps.google.com/?ie=UTF8&amp;ll=47.595131,-122.330414&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'></iframe>
+                    <iframe class="location-map" id="map"
+                        src='https://maps.google.com/?ie=UTF8&amp;ll=17.5246686000,73.5244691000&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'></iframe>
                 </div>
             </div>
 
@@ -236,4 +237,35 @@
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            var storage = window.localStorage;
+            //  e.preventDefault();
+            alert('cuntsssssssss')
+            $.ajax({
+                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                type: "get",
+                dataType: "json",
+                data: {
+                    'auth-token': storage.token
+                },
+                success: function (result) {
+                    $(function () {
+                        $("#name").text(result.restaurant.name);
+                        $("#meals").text(result.restaurant.cuisines);
+                        $("#opening").text(result.restaurant.timings);
+                        // $("#contact").attr("href", result.restaurant.phone_numbers)
+                        $("#contact2").text(result.restaurant.phone_numbers);
+                        $("#address").text(result.restaurant.location.address);
+                        $("#map").attr("src", 'https://maps.google.com/?ie=UTF8&amp;ll=' +
+                        result.restaurant.location.latitude + ',' + result.restaurant.location.longitude +
+                        '&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed')
+                    });
+                },
+                error: function (request, error) {
+                    alert("Request: " + JSON.stringify(error));
+                }
+            });
+        });
+    </script>
 </body>
