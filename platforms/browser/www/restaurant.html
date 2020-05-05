@@ -138,19 +138,8 @@
                     <i class="fa fa-star color-yellow1-dark font-18 left-5"></i>
                 </p>
                 <div class="content bottom-15">
-                    <div class="single-slider owl-carousel owl-no-dots">
-                        <div>
-                            <p class="font-18 thin center-text color-theme line-height-huge bottom-15">
-                                The code is always great with any Enabled template, but it's the customer support that
-                                wins me over always.
-                            </p>
-                        </div>
-                        <div>
-                            <p class="font-18 thin center-text color-theme line-height-huge bottom-15">
-                                The best support I have ever had, it's so good I purchased another theme. Highlighy
-                                Recommended.
-                            </p>
-                        </div>
+                    <div id="review" class="single-slider owl-carousel owl-no-dots">
+
                     </div>
                 </div>
                 <div class="content bottom-0">
@@ -251,12 +240,15 @@
                 },
                 success: function (result) {
                     $(function () {
+                        $('.bg-29').css('background-image', 'url("' + result.restaurant.thumb + '")');
                         $("#name").text(result.restaurant.name);
                         $("#meals").text(result.restaurant.cuisines);
                         $("#opening").text(result.restaurant.timings);
                         // $("#contact").attr("href", result.restaurant.phone_numbers)
                         $("#contact2").text(result.restaurant.phone_numbers);
                         $("#address").text(result.restaurant.location.address);
+                        // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
+                        $('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">'+result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
                         $("#map").attr("src", 'https://maps.google.com/?ie=UTF8&amp;ll=' +
                         result.restaurant.location.latitude + ',' + result.restaurant.location.longitude +
                         '&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed')
