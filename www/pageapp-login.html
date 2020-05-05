@@ -48,33 +48,35 @@
                     <div class="caption-center">
                         <div class="left-50 right-50">
                             <form>
-                            <h1 class="color-white center-text uppercase ultrabold fa-4x">dishway</h1>
-                            <p class="color-highlight center-text font-12 under-heading bottom-30 top-5">
-                                Let's get you in your account.
-                            </p>
-                            <div class="input-style input-light has-icon input-style-1 input-required">
-                                <i class="input-icon fa fa-user font-11"></i>
-                                <span>Username</span>
-                                <em>(required)</em>
-                                <input type="email" placeholder="Username" name="email" id="email">
-                            </div>
-                            <div class="input-style input-light has-icon input-style-1 input-required bottom-30">
-                                <i class="input-icon fa fa-lock font-11"></i>
-                                <span>Password</span>
-                                <em>(required)</em>
-                                <input type="password" placeholder="Password" name="password" id="password">
-                            </div>
-                            <div class="one-half">
-                                <a href="pageapp-register.html" class="font-11 color-white opacity-50">Create
-                                    Account</a>
-                            </div>
-                            <div class="one-half last-column">
-                                <a href="pageapp-forgot.html" class="text-right font-11 color-white opacity-50">Fogot
-                                    Credentials</a>
-                            </div>
-                            <div class="clear"></div>
-                            <a href="" id="login" type="submit" class="back-button button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">LOGIN</a>
-                            <div class="divider top-30"></div>
+                                <h1 class="color-white center-text uppercase ultrabold fa-4x">dishway</h1>
+                                <p class="color-highlight center-text font-12 under-heading bottom-30 top-5">
+                                    Let's get you in your account.
+                                </p>
+                                <div class="input-style input-light has-icon input-style-1 input-required">
+                                    <i class="input-icon fa fa-user font-11"></i>
+                                    <span>Username</span>
+                                    <em>(required)</em>
+                                    <input type="tel" placeholder="Username" name="email" id="email">
+                                </div>
+                                <div class="input-style input-light has-icon input-style-1 input-required bottom-30">
+                                    <i class="input-icon fa fa-lock font-11"></i>
+                                    <span>Password</span>
+                                    <em>(required)</em>
+                                    <input type="password" placeholder="Password" name="password" id="password">
+                                </div>
+                                <div class="one-half">
+                                    <a href="pageapp-register.html" class="font-11 color-white opacity-50">Create
+                                        Account</a>
+                                </div>
+                                <div class="one-half last-column">
+                                    <a href="pageapp-forgot.html"
+                                        class="text-right font-11 color-white opacity-50">Fogot
+                                        Credentials</a>
+                                </div>
+                                <div class="clear"></div>
+                                <a id="login" type="submit"
+                                    class="back-button button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">LOGIN</a>
+                                <div class="divider top-30"></div>
                             </form>
                         </div>
                     </div>
@@ -91,18 +93,24 @@
     <script>
         $(document).ready(function () {
             $("#login").click(function (e) {
-                 e.preventDefault();
-                 alert('cuntsssssssss')
+                //  e.preventDefault();
+                alert('cuntsssssssss')
                 $.ajax({
                     url: "http://127.0.0.1:3001/api/users/login",
                     type: "post",
-                    dataType: "json",
+                    // dataType: "json",
                     data: {
                         email: $("#email").val(),
                         password: $("#password").val()
                     },
                     success: function (result) {
-                        alert(result)
+                        var storage = window.localStorage;
+                        storage.setItem('token',result) // Pass a key name and its value to add or update that key.
+                        alert('this is storage:' + storage);
+                        $("#login").attr("href", "pageapp-register.html");
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(error));
                     }
                 });
             })
