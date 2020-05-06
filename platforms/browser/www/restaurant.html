@@ -320,7 +320,7 @@
                             )
                         }
                         for (let i = 0; i < result.restaurant.photo_count; i++) {
-                            $('#photos').append(' <a class="default-link" data-lightbox="gallery-1" href="' + result.restaurant.photos[i].photo.url + '" title="Vynil and Typerwritter"><img src="images/empty.png" data-src="' + result.restaurant.photos[i].photo.thumb_url + '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>')
+                            $('#photos').append(' <a class="default-link" data-lightbox="gallery-1" href="' + result.restaurant.photos[i].photo.url + '" title="Vynil and Typerwritter"><img src="' + result.restaurant.photos[i].photo.thumb_url + '" data-src="' + result.restaurant.photos[i].photo.thumb_url + '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>')
                         } 
                         
                         $('.bg-29').css('background-image', 'url("' + result.restaurant.featured_image + '")');
