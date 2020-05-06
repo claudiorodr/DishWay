@@ -267,7 +267,9 @@
         $(document).ready(function () {
             var storage = window.localStorage;
             //  e.preventDefault();
-            alert('cuntsssssssss')
+            //alert('cuntsssssssss')
+
+
             $.ajax({
                 url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
                 type: "get",
@@ -329,15 +331,18 @@
                         $("#contact2").text(result.restaurant.phone_numbers);
                         $("#address").text(result.restaurant.location.address);
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
-                        $('#review').append(
-                            '<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +
-                            result.restaurant.all_reviews.reviews[0].review.critic +
-                            '</p></div>')
-                        $("#map").attr("src", 'https://maps.google.com/?ie=UTF8&amp;ll=' +
-                            result.restaurant.location.latitude + ',' + result
-                            .restaurant.location.longitude +
-                            '&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'
-                        )
+                        $('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +result.restaurant.all_reviews.reviews[0].review.critic +'</p></div>')
+                        
+                        var lat = result.restaurant.location.latitude;
+                        var lng = result.restaurant.location.longitude;
+                        
+                        var myLatLng = { lat: lat, lng: lng };
+
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: myLatLng,
+                        });
+                        $("#map").attr("src", 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng);
                     });
                 },
                 error: function (request, error) {
