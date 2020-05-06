@@ -189,16 +189,7 @@
 
             <div class="content content-boxed round-medium shadow-huge">
                 <div class="content">
-
-                    <a href="#"
-                        class="get-location button button-full bg-highlight button-m button-round-small shadow-large">Get
-                        My Location</a>
-                    <p class="location-coordinates"></p>
-                    <h4 class="bolder">Show Location on Map</h4>
-                    <p>
-                        Tap the "Get My Location" button above and this map will automatically update with your new
-                        location. It's that simple.
-                    </p>
+                    <h4 class="bolder">Location</h4>
                 </div>
                 <div class="responsive-iframe bottom-0 add-iframe">
                     <iframe class="location-map" id="map"
@@ -267,11 +258,11 @@
         $(document).ready(function () {
             var storage = window.localStorage;
             //  e.preventDefault();
-            //alert('cuntsssssssss')
+            alert('cuntsssssssss')
 
 
             $.ajax({
-                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                url: "http://127.0.0.1:3001/api/restaurants/find/19117386",
                 type: "get",
                 dataType: "json",
                 data: {
