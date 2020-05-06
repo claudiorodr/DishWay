@@ -89,8 +89,8 @@
                             <h5 class="bolder"><i class="fa fa-calendar-alt fa-1x"></i> Opening hours</h5>
                             <p id="opening" class="bottom-25"></p>
 
-                            <h5 class="bolder"><i class="fas fa-info-circle color-black fa-1x"></i> Information</h5>
-                            <p> informacao extra</p>
+                            <h5 id="info" class="bolder"><i class="fas fa-info-circle color-black fa-1x" style="margin-bottom: 10px;"></i>
+                                Information</h5>
 
                             <h5 class="bolder"><i class="fa fa-phone"></i> Contacts</h5>
                             <div class="link-list link-list-1">
@@ -127,6 +127,15 @@
                     </div>
                 </div>
             </div>
+            <div class="content-boxed">
+                <div class="left-15 right-15">
+                    <div id="photos" class="gallery-views gallery-view-1">
+  
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
 
             <div class="content-boxed">
                 <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Testimonials</h1>
@@ -146,6 +155,34 @@
                     <div class="text-center">
                         <a href="#" class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
                             Reviews!</a><br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-boxed">
+                <div class="content">
+                    <div class="review-4 container top-10">
+                        <h1 class="font-500">5.00</h1>
+                        <h2 class="font-400">John Doe said:</h2>
+                        <div class="review-stars">
+                            <i class="fa fa-star color-yellow1-dark"></i>
+                            <i class="fa fa-star color-yellow1-dark"></i>
+                            <i class="fa fa-star color-yellow1-dark"></i>
+                            <i class="fa fa-star color-yellow1-dark"></i>
+                            <i class="fa fa-star color-yellow1-dark"></i>
+                        </div>
+                        <img src="images/pictures/1t.jpg">
+                        <p class="bottom-10">
+                            The best support I have ever had. They are on top of things and with very fast
+                            and accurate
+                            replies. I will continue to purchase items as needed and will gladly recommend
+                            there service
+                            to anyone. I would give them 10 stars if I could. Keep up the great work and
+                            even better
+                            service.
+                        </p>
+                        <a href="#" class="color-blue2-dark bottom-30">By Enabled on <u>ThemeForest
+                                Item</u></a>
                     </div>
                 </div>
             </div>
@@ -240,7 +277,51 @@
                 },
                 success: function (result) {
                     $(function () {
-                        $('.bg-29').css('background-image', 'url("' + result.restaurant.thumb + '")');
+                        if (result.restaurant.price_range == 1) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Cheap</span><strong>This restaurant is considered very cheap!</strong><em class="color-green1-dark">Cheap</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.price_range == 2) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Regular price</span><strong>This restaurant is considered medium price!</strong><em class="color-yellow1-dark">Medium</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.price_range == 3) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Regular price</span><strong>This restaurant is considered medium price!</strong><em class="color-yellow1-dark">Medium</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.price_range == 4) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Expensive</span><strong>This restaurant is considered very cheap!</strong><em class="color-red1-dark">Expensive</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.has_online_delivery == 1) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.has_online_delivery == 0) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no support for online booking!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.is_table_reservation_supported == 1) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant supports online booking!</strong><em class="color-red1-dark">Online Booking</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        if (result.restaurant.is_table_reservation_supported == 0) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">No Online Booking</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                            )
+                        }
+                        for (let i = 0; i < result.restaurant.photo_count; i++) {
+                            $('#photos').append(' <a class="default-link" data-lightbox="gallery-1" href="' + result.restaurant.photos[i].photo.url + '" title="Vynil and Typerwritter"><img src="images/empty.png" data-src="' + result.restaurant.photos[i].photo.thumb_url + '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>')
+                        } 
+                        
+                        $('.bg-29').css('background-image', 'url("' + result.restaurant.featured_image + '")');
                         $("#name").text(result.restaurant.name);
                         $("#meals").text(result.restaurant.cuisines);
                         $("#opening").text(result.restaurant.timings);
@@ -248,10 +329,15 @@
                         $("#contact2").text(result.restaurant.phone_numbers);
                         $("#address").text(result.restaurant.location.address);
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
-                        $('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">'+result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
+                        $('#review').append(
+                            '<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +
+                            result.restaurant.all_reviews.reviews[0].review.critic +
+                            '</p></div>')
                         $("#map").attr("src", 'https://maps.google.com/?ie=UTF8&amp;ll=' +
-                        result.restaurant.location.latitude + ',' + result.restaurant.location.longitude +
-                        '&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed')
+                            result.restaurant.location.latitude + ',' + result
+                            .restaurant.location.longitude +
+                            '&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'
+                        )
                     });
                 },
                 error: function (request, error) {
