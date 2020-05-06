@@ -109,16 +109,11 @@
                                     <em class="bg-highlight">TAP TO CALL</em>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
-                                <a href="mailto:mail@domain.com">
+                                <a href="mailto:mail@dishway.com">
                                     <i class="fa fa-envelope color-blue2-dark"></i>
-                                    <span>mail@domain.com</span>
+                                    <span>mail@dishway.com</span>
                                     <em class="bg-highlight">TAP TO MAIL</em>
                                     <i class="fa fa-angle-right"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fab fa-facebook color-facebook"></i>
-                                    <span>enabled.labs</span>
-                                    <i class="fa fa-link"></i>
                                 </a>
                             </div>
 
@@ -127,9 +122,7 @@
                             <h5 class="bolder"><i class="fas fa-map-marker color-black fa-1x"></i> Postal Information
                             </h5>
 
-                            <p id="address">
-
-                            </p>
+                            <p id="address"></p>
 
                             <div class="divider bottom-0"></div>
                         </div>
@@ -137,6 +130,7 @@
                 </div>
             </div>
             <div class="content-boxed">
+                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Gallery</h1>
                 <div class="left-15 right-15">
                     <div id="photos" class="gallery-views gallery-view-1">
 
@@ -147,7 +141,7 @@
 
 
             <div class="content-boxed">
-                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Testimonials</h1>
+                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Reviews</h1>
                 <p class="center-text bottom-30">
                     <i class="fa fa-star color-yellow1-dark font-18 right-5"></i>
                     <i class="fa fa-star color-yellow1-dark font-24 right-5"></i>
@@ -156,8 +150,19 @@
                     <i class="fa fa-star color-yellow1-dark font-18 left-5"></i>
                 </p>
                 <div class="content bottom-15">
-                    <div id="review" class="single-slider owl-carousel owl-no-dots">
-
+                    <div id="review2" class="single-slider owl-carousel owl-no-dots">
+<!--                         <div>
+                            <p class="font-18 thin center-text line-height-huge bottom-15">
+                                The code is always great with any Enabled template, but it's the customer support that
+                                wins me over always.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-18 thin center-text line-height-huge bottom-15">
+                                The best support I have ever had, it's so good I purchased another template. Highlighy
+                                Recommended.
+                            </p>
+                        </div> -->
                     </div>
                 </div>
                 <div class="content bottom-0">
@@ -168,31 +173,6 @@
                 </div>
             </div>
 
-            <div class="content-boxed">
-                <div class="content">
-                    <div class="review-4 container top-10">
-                        <h1 class="font-500">5.00</h1>
-                        <h2 class="font-400">John Doe said:</h2>
-                        <div class="review-stars">
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                        </div>
-                        <img src="images/pictures/1t.jpg">
-                        <p class="bottom-10">
-                            The best support I have ever had. They are on top of things and with very fast
-                            and accurate
-                            replies. I will continue to purchase items as needed and will gladly recommend
-                            there service
-                            to anyone. I would give them 10 stars if I could. Keep up the great work and
-                            even better
-                            service.
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             <div class="content content-boxed round-medium shadow-huge">
                 <div class="content">
@@ -269,7 +249,9 @@
 
 
             $.ajax({
-                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                //19356617
+                //18971230
+                url: "http://127.0.0.1:3001/api/restaurants/find/18971230",
                 type: "get",
                 dataType: "json",
                 data: {
@@ -347,7 +329,13 @@
                         $("#contact2").text(result.restaurant.phone_numbers);
                         $("#address").text(result.restaurant.location.address);
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
-                        $('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
+
+                        //Falta alterar isto
+                         for(i = 0; i < 2; i++){
+                            $('.content bottom-15 #review2').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[i].review.critic + '</p></div>')
+                        } 
+
+                        //$('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
 
                         var lat = result.restaurant.location.latitude;
                         var lng = result.restaurant.location.longitude;
