@@ -296,17 +296,17 @@
                         }
                         if (result.restaurant.price_range == 4) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Expensive</span><strong>This restaurant is considered very cheap!</strong><em class="color-red1-dark">Expensive</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Expensive</span><strong>This restaurant is considered expensive!</strong><em class="color-red1-dark">Expensive</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
                             )
                         }
                         if (result.restaurant.has_online_delivery == 1) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-green1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
                         }
                         if (result.restaurant.has_online_delivery == 0) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no support for online booking!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
                         if (result.restaurant.is_table_reservation_supported == 1) {
@@ -316,7 +316,7 @@
                         }
                         if (result.restaurant.is_table_reservation_supported == 0) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">No Online Booking</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant does not support online booking!</strong><em class="color-red1-dark">No Online Booking</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
                         for (let i = 0; i < result.restaurant.photo_count; i++) {
