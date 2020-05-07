@@ -118,6 +118,7 @@
                         storage.setItem('token', result.token) // Pass a key name and its value to add or update that key.
                         storage.setItem('user_id', result.user_id) // Pass a key name and its value to add or update that key.
                         storage.setItem('user_name', result.user_name) // Pass a key name and its value to add or update that key.
+
                         $("#login").attr("href", "pageapp-register.html");
                     },
                     error: function (request, error) {
