@@ -156,7 +156,7 @@
 
             <div class="content content-boxed round-medium shadow-huge">
                 <div class="content">
-                    <h4 class="bolder">Show Restaurant Location on Map</h4>
+                    <h4 class="bolder">Location</h4>
                 </div>
                 <div class="responsive-iframe bottom-0 add-iframe">
                     <iframe class="location-map" id="map"
@@ -199,13 +199,13 @@
         $(document).ready(function () {
             var storage = window.localStorage;
             //  e.preventDefault();
-            //alert('cuntsssssssss')
+            alert('cuntsssssssss')
 
 
             $.ajax({
                 //19356617
                 //18971230
-                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                url: "http://127.0.0.1:3001/api/restaurants/find/18971230",
                 type: "get",
                 dataType: "json",
                 data: {
@@ -302,11 +302,11 @@
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
 
                         //Falta alterar isto
-                        $('#review2').append('<div class="single-slider owl-carousel owl-no-dots">')
-                        for (i = 0; i < 2; i++) {
-                            $('#review2').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[i].review.critic + '</p></div>')
-                        }
-                        $('#review2').append('</div>')
+
+                         for(i = 0; i < 2; i++){
+                            $('.content bottom-15 #review2').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[i].review.critic + '</p></div>')
+                        } 
+
 
                         //$('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
 

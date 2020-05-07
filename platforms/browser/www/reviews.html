@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>StickyMobile</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+</head>
+
+<body class="theme-light" data-background="none" data-highlight="red2">
+    <div id="page">
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="index.html" class="header-title">Sticky Mobile</a>
+            <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+            <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
+        </div>
+        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
+            <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
+            <a href="index-components.html" class="active-nav"><i class="fa fa-star"></i><span>Features</span></a>
+            <a href="index-pages.html"><i class="fa fa-heart"></i><span>Pages</span></a>
+            <a href="index-search.html"><i class="fa fa-search"></i><span>Search</span></a>
+            <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
+            <div class="clear"></div>
+        </div>
+        <div class="page-content header-clear-medium">
+
+            <div class="content-boxed" id="your_review">
+                <div class="content">
+                    <h3 class="bolder">Write your review</h3>
+                    <p style="margin-bottom: 5px;">
+                        Please describe your experience at the restaurant.
+                    </p>
+                    <div class="input-style input-style-1 input-required">
+                        <span>Enter your message</span>
+                        <em>(required)</em>
+                        <textarea id="critic" placeholder="Enter your message"></textarea>
+                    </div>
+                    <div class="form-button">
+                        <input type="submit" id="button"
+                            class="button bg-highlight button-m button-full round-small bottom-0 shadow-huge contactSubmitButton"
+                            value="Send review" data-formId="contactForm" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-boxed" id="reviews">
+
+            </div>
+            <div class="menu-hider"></div>
+        </div>
+        <script type="text/javascript" src="scripts/jquery.js"></script>
+        <script type="text/javascript" src="scripts/plugins.js"></script>
+        <script type="text/javascript" src="scripts/custom.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.restaurant.all_reviews.reviews.length == 0) {
+                            $('#reviews').hide();
+                        } else {
+                            for (let i = 0; i < response.restaurant.all_reviews.reviews.length; i++) {
+                                $("#reviews").append( '<div class="content"> <div class="review-4 container top-10"> <h1 class="font-500">5.00</h1> <h2 class="font-400" id="name">' + response.restaurant.all_reviews.reviews[i].review.author + ' said:</h2> <div class="review-stars"> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> </div> <img src="images/pictures/1t.jpg"> <p class="bottom-10" id="review">' + response.restaurant.all_reviews.reviews[i].review.critic + ' </p> </div> </div> </div>');
+                            }
+                        }
+                    },
+                    error: function (request, error) {
+                        alert(error)
+                    }
+                });
+                $("#button").click(function (e) {
+                    e.preventDefault();
+                    var storage = window.localStorage;
+                    $.ajax({
+                        type: "post",
+                        url: "http://127.0.0.1:3001/api/restaurants/review",
+                        data: {
+                            "id": "19356617",
+                            "author": storage.user_name,
+                            "critic": $('#critic').val()
+                        },
+                        // dataType: "json",
+                        success: function (response) {
+                            $("#critic").attr("disabled", true);
+                            $("#button").attr("disabled", true);
+                            $("#your_review").hide(1000);
+                            $.ajax({
+                                type: "get",
+                                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                                dataType: "json",
+                                success: function (response) {
+                                    $("#reviews").append( '<div class="content"> <div class="review-4 container top-10"> <h1 class="font-500">5.00</h1> <h2 class="font-400" id="name">' + response.restaurant.all_reviews.reviews[response.restaurant.all_reviews.reviews.length - 1].review.author + ' said:</h2> <div class="review-stars"> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> </div> <img src="images/pictures/1t.jpg"> <p class="bottom-10" id="review">' + response.restaurant.all_reviews.reviews[response.restaurant.all_reviews.reviews.length - 1].review.critic + ' </p> </div> </div> </div>');
+                                }
+                            });
+                        },
+                        error: function (request, error) {
+                            alert(error)
+                        }
+                    });
+
+                });
+            });
+        </script>
+</body>

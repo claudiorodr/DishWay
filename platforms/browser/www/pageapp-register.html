@@ -114,8 +114,8 @@
                     },
                     success: function (result) {
                         var storage = window.localStorage;
-                        storage.setItem('id', result.user) // Pass a key name and its value to add or update that key.
-                        alert('this is storage:' + storage);
+                        storage.setItem('user_id', result.user_id) // Pass a key name and its value to add or update that key.
+                        storage.setItem('user_name', result.user_name) // Pass a key name and its value to add or update that key.
                         $("#login").attr("href", "pageapp-register.html");
                     },
                     error: function (request, error) {
