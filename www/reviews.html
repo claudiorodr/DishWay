@@ -39,21 +39,8 @@
             <div class="clear"></div>
         </div>
         <div class="page-content header-clear-medium">
-            <div data-height="130" class="caption caption-margins round-medium shadow-huge">
-                <div class="caption-center right-15 top-15 text-right">
-                    <a href="#" class="back-button button button-xs button-round-huge bg-highlight">Back
-                        Home</a>
-                </div>
-                <div class="caption-center left-15 text-left">
-                    <h1 class="color-white bolder">Reviews</h1>
-                    <p class="under-heading color-white opacity-90 bottom-0">
-                        Share your Customer Feedback
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-70"></div>
-                <div class="caption-bg bg-18"></div>
-            </div>
-            <div class="content-boxed">
+
+            <div class="content-boxed" id="your_review">
                 <div class="content">
                     <h3 class="bolder">Write your review</h3>
                     <p style="margin-bottom: 5px;">
@@ -72,59 +59,64 @@
                 </div>
             </div>
 
-            <div class="content-boxed">
-                <div class="content">
-                    <div class="review-4 container top-10">
-                        <h1 class="font-500">5.00</h1>
-                        <h2 class="font-400">John Doe said:</h2>
-                        <div class="review-stars">
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                            <i class="fa fa-star color-yellow1-dark"></i>
-                        </div>
-                        <img src="images/pictures/1t.jpg">
-                        <p class="bottom-10">
-                            The best support I have ever had. They are on top of things and with
-                            very fast and accurate
-                            replies. I will continue to purchase items as needed and will gladly
-                            recommend there service
-                            to anyone. I would give them 10 stars if I could. Keep up the great work
-                            and even better
-                            service.
-                        </p>
-                    </div>
-                </div>
+            <div class="content-boxed" id="reviews">
+
             </div>
-
+            <div class="menu-hider"></div>
         </div>
-        <div class="menu-hider"></div>
-    </div>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/plugins.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#button").click(function (e) { 
-                e.preventDefault();
+        <script type="text/javascript" src="scripts/jquery.js"></script>
+        <script type="text/javascript" src="scripts/plugins.js"></script>
+        <script type="text/javascript" src="scripts/custom.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.restaurant.all_reviews.reviews.length == 0) {
+                            $('#reviews').hide();
+                        } else {
+                            for (let i = 0; i < response.restaurant.all_reviews.reviews.length; i++) {
+                                $("#reviews").append( '<div class="content"> <div class="review-4 container top-10"> <h1 class="font-500">5.00</h1> <h2 class="font-400" id="name">' + response.restaurant.all_reviews.reviews[i].review.author + ' said:</h2> <div class="review-stars"> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> </div> <img src="images/pictures/1t.jpg"> <p class="bottom-10" id="review">' + response.restaurant.all_reviews.reviews[i].review.critic + ' </p> </div> </div> </div>');
+                            }
+                        }
+                    },
+                    error: function (request, error) {
+                        alert(error)
+                    }
+                });
+                $("#button").click(function (e) {
+                    e.preventDefault();
+                    var storage = window.localStorage;
+                    $.ajax({
+                        type: "post",
+                        url: "http://127.0.0.1:3001/api/restaurants/review",
+                        data: {
+                            "id": "19356617",
+                            "author": storage.user_name,
+                            "critic": $('#critic').val()
+                        },
+                        // dataType: "json",
+                        success: function (response) {
+                            $("#critic").attr("disabled", true);
+                            $("#button").attr("disabled", true);
+                            $("#your_review").hide(1000);
+                            $.ajax({
+                                type: "get",
+                                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                                dataType: "json",
+                                success: function (response) {
+                                    $("#reviews").append( '<div class="content"> <div class="review-4 container top-10"> <h1 class="font-500">5.00</h1> <h2 class="font-400" id="name">' + response.restaurant.all_reviews.reviews[response.restaurant.all_reviews.reviews.length - 1].review.author + ' said:</h2> <div class="review-stars"> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> <i class="fa fa-star color-yellow1-dark"></i> </div> <img src="images/pictures/1t.jpg"> <p class="bottom-10" id="review">' + response.restaurant.all_reviews.reviews[response.restaurant.all_reviews.reviews.length - 1].review.critic + ' </p> </div> </div> </div>');
+                                }
+                            });
+                        },
+                        error: function (request, error) {
+                            alert(error)
+                        }
+                    });
 
-            // alert($("#critic").val())
-            var storage = window.localStorage;
-            $.ajax({
-                type: "post",
-                url: "http://127.0.0.1:3001/api/restaurants/review",
-                data: {
-                    "author" : storage.author,
-                    "critic" : $('#critic').val()
-                },
-                dataType: "json",
-                success: function (response) {
-                    alert("alex é lindo")
-                }
+                });
             });
-                
-            });
-        });
-    </script>
+        </script>
 </body>
