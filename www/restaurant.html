@@ -43,12 +43,6 @@
         </div>
         <div class="page-content header-clear-medium">
 
-            <!-- 
-    Botão back to home
-<div class="caption-center right-15 top-15 text-right">
-<a href="#" class="back-button button button-xs button-round-huge bg-highlight">Back Home</a>
-</div> -->
-
             <div data-height="250" class="caption caption-margins round-medium shadow-large">
 
                 <div id="stars" class="caption-top left-20 top-50">
@@ -58,9 +52,9 @@
                     <h1 id="rating" class="font-500 color-yellow1-dark" style="margin-left: 110px"></h1>
                 </div>
 
-                <div class="caption-center right-20">
+<!--                 <div class="caption-center right-20">
                     <p class="text-right color-green1-dark bottom-0"></p>
-                </div>
+                </div> -->
                 <div class="caption-center left-20">
                     <h1 id="name" class="color-white bolder"></h1>
                     <p id="meals" class="under-heading color-white opacity-90 bottom-0">
@@ -74,21 +68,6 @@
                 <div class="caption-bg bg-29"></div>
 
             </div>
-
-            <!--             <div class="content-boxed">
-                <div class="content bottom-0">
-                    <h5 class="bolder"><i class="fa fa-calendar-alt fa-1x"></i> Opening hours</h5>
-                    <p class="bottom-25">10h-19h everyday</p>
-                    <h5 class="bolder"><i class="fas fa-info-circle color-black fa-1x"></i> Information</h5>
-                    <p> informacao extra</p>
-                    <h5 class="bolder"><i class="fa fa-phone"></i> Contact</h5>
-                    <p>Mobile: 21312312312
-                        <a href="#" class="round-tiny shadow-medium bg-phone"><i class="fa fa-phone"></i>Call now</a>
-                    </p>
-                </div>
-
-
-            </div> -->
 
             <div class="content-boxed content-boxed-full">
                 <div class="content bottom-0">
@@ -149,9 +128,9 @@
                     <i class="fa fa-star color-yellow1-dark font-24 left-5"></i>
                     <i class="fa fa-star color-yellow1-dark font-18 left-5"></i>
                 </p>
-                <div class="content bottom-15">
-                    <div id="review2" class="single-slider owl-carousel owl-no-dots">
-<!--                         <div>
+                <div id="review2" class="content bottom-15">
+                    <!--                     <div id="review2" class="single-slider owl-carousel owl-no-dots">
+                         <div>
                             <p class="font-18 thin center-text line-height-huge bottom-15">
                                 The code is always great with any Enabled template, but it's the customer support that
                                 wins me over always.
@@ -162,9 +141,10 @@
                                 The best support I have ever had, it's so good I purchased another template. Highlighy
                                 Recommended.
                             </p>
-                        </div> -->
-                    </div>
+                        </div>
+                    </div> -->
                 </div>
+                
                 <div class="content bottom-0">
                     <div class="text-center">
                         <a href="#" class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
@@ -183,32 +163,6 @@
                         src='https://maps.google.com/?ie=UTF8&amp;ll=17.5246686000,73.5244691000&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'></iframe>
                 </div>
             </div>
-
-            <!--             <div class="content-boxed">
-                <div class="footer">
-                    <a href="#" class="footer-title"><span class="color-highlight">StickyMobile</span></a>
-                    <p class="footer-text"><span>Made with <i
-                                class="fa fa-heart color-highlight font-16 left-10 right-10"></i> by
-                            Enabled</span><br><br>Powered by the best Mobile Website Developer on the Envato
-                        Marketplaces. Elite Quality. Elite Products.</p>
-                    <div class="footer-socials">
-                        <a href="#" class="round-tiny shadow-medium bg-facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="round-tiny shadow-medium bg-twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="round-tiny shadow-medium bg-phone"><i class="fa fa-phone"></i></a>
-                        <a href="#" data-menu="menu-share" class="round-tiny shadow-medium bg-red2-dark"><i
-                                class="fa fa-share-alt"></i></a>
-                        <a href="#" class="back-to-top round-tiny shadow-medium bg-dark1-light"><i
-                                class="fa fa-angle-up"></i></a>
-                    </div>
-                    <div class="clear"></div>
-                    <p class="footer-copyright">Copyright &copy; Enabled <span id="copyright-year">2017</span>. All
-                        Rights Reserved.</p>
-                    <p class="footer-links"><a href="#" class="color-highlight">Privacy Policy</a> | <a href="#"
-                            class="color-highlight">Terms and Conditions</a> | <a href="#"
-                            class="back-to-top color-highlight"> Back to Top</a></p>
-                    <div class="clear"></div>
-                </div>
-            </div> -->
 
         </div>
 
@@ -279,37 +233,54 @@
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Expensive</span><strong>This restaurant is considered expensive!</strong><em class="color-red1-dark">Expensive</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
                             )
                         }
+
                         if (result.restaurant.has_online_delivery == 1) {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-green1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
                         }
-                        if (result.restaurant.has_online_delivery == 0) {
+                        else {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
-                        if (result.restaurant.is_table_reservation_supported == 1) {
+
+                        if (result.restaurant.highlights.includes("Credit Card")) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant supports online booking!</strong><em class="color-red1-dark">Online Booking</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant has vegetarian food!</strong><em class="color-red1-dark">Vegetarian</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
                         }
-                        if (result.restaurant.is_table_reservation_supported == 0) {
+                        else {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-bookmark color-red-dark"></i><span>Online Booking</span><strong>This restaurant does not support online booking!</strong><em class="color-red1-dark">No Online Booking</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant does not have vegetarian food!</strong><em class="color-red1-dark">No Vegetarian</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
+
+                        if (result.restaurant.highlights.includes("Air Conditioned")) {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioned</span><strong>This restaurant has air conditioned!</strong><em class="color-red1-dark">Air Conditioned</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                            )
+                        }
+                        else {
+                            $('#info').append(
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioned</span><strong>This restaurant does not have air conditioned!</strong><em class="color-red1-dark">No Air Conditioned</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                            )
+                        }
+
                         for (let i = 0; i < result.restaurant.photo_count; i++) {
                             $('#photos').append(' <a class="default-link" data-lightbox="gallery-1" href="' + result.restaurant.photos[i].photo.url + '" title="Vynil and Typerwritter"><img src="' + result.restaurant.photos[i].photo.thumb_url + '" data-src="' + result.restaurant.photos[i].photo.thumb_url + '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>')
                         }
                         if (result.restaurant.user_rating.aggregate_rating == 0) {
-                            $("#rating").text("Not rated yet!");
+                            $("#rating").text("N.A. / 5.0");
+
+                            $('#stars').append('<div class="review-stars">')
+                            for (i = 0; i < 5; i++) {
+                                $('#stars').append('<i class="far fa-star color-red1-dark font-18"></i>')
+                            }
+                            $('#stars').append('</div>')
                         }
                         else {
                             $("#rating").text(result.restaurant.user_rating.aggregate_rating + " / 5.0");
-                        }
-
-                        if (result.restaurant.user_rating.aggregate_rating != 0) {
 
                             $('#stars').append('<div class="review-stars">')
                             for (i = 0; i < parseInt(result.restaurant.user_rating.aggregate_rating); i++) {
@@ -334,6 +305,7 @@
                          for(i = 0; i < 2; i++){
                             $('.content bottom-15 #review2').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[i].review.critic + '</p></div>')
                         } 
+
 
                         //$('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
 
