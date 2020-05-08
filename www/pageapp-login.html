@@ -47,7 +47,7 @@
                 <div data-height="cover" class="caption bottom-0">
                     <div class="caption-center">
                         <div class="left-50 right-50">
-                            <form>
+                            
                                 <h1 class="color-white center-text uppercase ultrabold fa-4x">dishway</h1>
                                 <p class="color-highlight center-text font-12 under-heading bottom-30 top-5">
                                     Let's get you in your account.
@@ -74,11 +74,13 @@
                                         Credentials</a>
                                 </div>
                                 <div class="clear"></div>
-                                <a id="login" type="submit" data-menu="menu-warning" class="back-button button button-full button-m shadow-large button-round-small
-                                    bg-highlight top-30 bottom-40">LOGIN</a>
+                                <span id="login" data-menu="menu-warning" class="button button-full button-m shadow-large button-round-small
+                                    bg-highlight top-30 bottom-40">LOGIN</span>
+                                    <div class=" top-30 bottom-40">
                                 <div class="preload-spinner2 border-highlight" id="loader"></div>
+                                </div>
 
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -87,16 +89,26 @@
             </div>
         </div>
         <div class="menu-hider"></div>
+        <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large"
+            data-menu-height="320" data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Successful login</h1>
+            <p class="boxed-text-large color-white">
+                You can now use your DishWay account and see hundreds of restaurants!
+            </p>
+            <a href="main.html"
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+        </div>
         <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
             data-menu-width="310" data-menu-effect="menu-over">
             <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
             <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
-            <p class="boxed-text-large color-white">
-                Continue with your previous actions. Easy to attach these to success.
+            <p class="boxed-text-large color-white" id="error">
+                
             </p>
-            <span href="#"
+            <a href=""
                 class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
-                Back</span>
+                Back</a>
         </div>
     </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -105,10 +117,10 @@
     <script>
         $(document).ready(function () {
             $("#loader").hide();
-            $("#login").click(function (e) {
+            $("#login").on("click",function (e) {
                  e.preventDefault();
-                $("#loader").show();
-                $("#login").hide();
+                 $("#login").hide();
+                 $("#loader").show();
                 $.ajax({
                     url: "http://127.0.0.1:3001/api/users/login",
                     type: "post",
@@ -123,9 +135,15 @@
                         storage.setItem('user_id', result.user_id) // Pass a key name and its value to add or update that key.
                         storage.setItem('user_name', result.user_name) // Pass a key name and its value to add or update that key.
                         $("#loader").hide();
+                        $("#menu-success").addClass("menu-active");
                         // $("#login").attr("href", "pageapp-register.html");
                     },
-                    error: function (request, error) {
+                    error: function (response, error) {
+                        $("#loader").hide();
+                        $("#login").show();
+                        $("#menu-warning").addClass("menu-active");
+                        $("#error").text(response.responseText);
+
                         // alert("Request: " + JSON.stringify(error));
                     }
                 });
