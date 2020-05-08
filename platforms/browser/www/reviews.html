@@ -39,7 +39,6 @@
             <div class="clear"></div>
         </div>
         <div class="page-content header-clear-medium">
-
             <div class="content-boxed" id="your_review">
                 <div class="content">
                     <h3 class="bolder">Write your review</h3>
@@ -59,6 +58,9 @@
                 </div>
             </div>
 
+            <div class="preload-spinner2 border-highlight" id="loader"></div>
+
+
             <div class="content-boxed" id="reviews">
 
             </div>
@@ -69,6 +71,7 @@
         <script type="text/javascript" src="scripts/custom.js"></script>
         <script>
             $(document).ready(function () {
+                $("#loader").hide();
                 $.ajax({
                     type: "get",
                     url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
@@ -89,6 +92,7 @@
                 $("#button").click(function (e) {
                     e.preventDefault();
                     var storage = window.localStorage;
+                    $("#loader").show();
                     $.ajax({
                         type: "post",
                         url: "http://127.0.0.1:3001/api/restaurants/review",
@@ -99,9 +103,10 @@
                         },
                         // dataType: "json",
                         success: function (response) {
+                            $("#your_review").hide(1000);
+                            $("#loader").hide();
                             $("#critic").attr("disabled", true);
                             $("#button").attr("disabled", true);
-                            $("#your_review").hide(1000);
                             $.ajax({
                                 type: "get",
                                 url: "http://127.0.0.1:3001/api/restaurants/find/19356617",

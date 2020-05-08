@@ -76,6 +76,8 @@
                                 <div class="clear"></div>
                                 <a id="login" type="submit" data-menu="menu-warning" class="back-button button button-full button-m shadow-large button-round-small
                                     bg-highlight top-30 bottom-40">LOGIN</a>
+                                <div class="preload-spinner2 border-highlight" id="loader"></div>
+
                             </form>
                         </div>
                     </div>
@@ -92,9 +94,9 @@
             <p class="boxed-text-large color-white">
                 Continue with your previous actions. Easy to attach these to success.
             </p>
-            <a href="#"
+            <span href="#"
                 class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
-                Back</a>
+                Back</span>
         </div>
     </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -102,9 +104,11 @@
     <script type="text/javascript" src="scripts/custom.js"></script>
     <script>
         $(document).ready(function () {
+            $("#loader").hide();
             $("#login").click(function (e) {
-                //  e.preventDefault();
-                alert('cuntsssssssss')
+                 e.preventDefault();
+                $("#loader").show();
+                $("#login").hide();
                 $.ajax({
                     url: "http://127.0.0.1:3001/api/users/login",
                     type: "post",
@@ -118,10 +122,11 @@
                         storage.setItem('token', result.token) // Pass a key name and its value to add or update that key.
                         storage.setItem('user_id', result.user_id) // Pass a key name and its value to add or update that key.
                         storage.setItem('user_name', result.user_name) // Pass a key name and its value to add or update that key.
-                        $("#login").attr("href", "pageapp-register.html");
+                        $("#loader").hide();
+                        // $("#login").attr("href", "pageapp-register.html");
                     },
                     error: function (request, error) {
-                        alert("Request: " + JSON.stringify(error));
+                        // alert("Request: " + JSON.stringify(error));
                     }
                 });
             })
