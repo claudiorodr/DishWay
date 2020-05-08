@@ -84,6 +84,10 @@
                     }
                 }
             });
+            $(selector).(function (e) { 
+                e.preventDefault();
+                
+            });
             $(document).on('keypress', function (e) {
                 if (e.which == 13) {
                     $.ajax({
