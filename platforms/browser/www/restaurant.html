@@ -215,7 +215,7 @@
                 success: function (result) {
                     $(function () {
                         storage.setItem('restaurant_name', result.restaurant.name) // Pass a key name and its value to add or update that key.
-                        storage.setItem('restaurant_address', result.restaurant.location.address) // Pass a key name and its value to add or update that key.
+                        storage.setItem('restaurant_address', result.restaurant.location.locality_verbose) // Pass a key name and its value to add or update that key.
 
                         if (result.restaurant.price_range == 1) {
                             $('#info').append(

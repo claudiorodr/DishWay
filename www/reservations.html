@@ -45,6 +45,27 @@
         </div>
 
         <div class="menu-hider"></div>
+        <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large"
+            data-menu-height="320" data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Reservation cancelled</h1>
+            <p class="boxed-text-large color-white">
+                Your reservation has now been canceled
+            </p>
+            <a href="main.html" id="ok"
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+        </div>
+        <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
+            data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
+            <p class="boxed-text-large color-white" id="error">
+
+            </p>
+            <a href=""
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
+                Back</a>
+        </div>
     </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
@@ -52,6 +73,7 @@
     <script>
         $(document).ready(function () {
             var storage = window.localStorage;
+
 
             $.ajax({
                 type: "get",
@@ -62,14 +84,15 @@
                 dataType: "json",
                 success: function (response) {
                     for (let i = 0; i < response.length; i++) {
-                        $("#reservations").append(` <div class="content-boxed content-boxed-full">
+                        $("#reservations").append(` <div class="content-boxed content-boxed-full" >
                             <div style="margin-bottom: 10px;"></div>
                             <div class="content bottom-10">
                                 <div class="float-left">
                                     <h1 class="bolder">` + response[i].restaurant_name + `</h1>
                                     <p class="font-10 under-heading bottom-15"><i
-                                            class="fa fa-map-marker-alt right-10"></i>` + response[i].restaurant_address +
-                                            `
+                                            class="fa fa-map-marker-alt right-10"></i>` + response[i]
+                            .restaurant_address +
+                            `
                                     </p>
                                 </div>
                                 <a href="#"
@@ -83,7 +106,8 @@
                                 </div>
                                 <div class="one-half last-column">
                                     <strong class="color-theme">Time:</strong>
-                                    <p class="font-12 bottom-15"><i class="far fa-clock right-5"></i>` + response[i].time + `</p>
+                                    <p class="font-12 bottom-15"><i class="far fa-clock right-5"></i>` + response[i]
+                            .time + `</p>
                                 </div>
                                 <div class="clear"></div>
                                 <strong class="color-theme">Description</strong>
@@ -101,7 +125,7 @@
                                     </div>
                                     <div class="user-group-title">
                                         <h5 class="color-theme bolder bottom-0">This reservation has ` +
-                                            response[i].number_guests + ` guests</h5>
+                            response[i].number_guests + ` guests</h5>
                                         <p class="under-heading font-10 color-highlight bottom-15">John, Jack, Jason and
                                             Joe and 16
                                             others</p>
@@ -112,11 +136,43 @@
                                     </div>
                                     <div class="clear"></div>
                                 </div>
-                                <a href="#"
-                                    class="button button-s button-full round-small shadow-huge bg-highlight">See Reservation</a>
+                                <span href="#" id="button" restaurant_id = "` + response[i]._id + `" 
+                                    class="delete button button-s button-full round-small shadow-huge bg-highlight">Cancel Reservation</span>
+                                    <div class="preload-spinner2 border-highlight" id="loader"></div>
+
                             </div>
-                        </div>`);
+                        </div>`)
                     }
+
+                    $("#loader").hide();
+                    $(".delete")
+                        .on("click", function () {
+
+                            $("#button").hide();
+                            $("#loader").show();
+                            $.ajax({
+                                type: "delete",
+                                url: "http://127.0.0.1:3001/api/reservations/delete",
+                                data: {
+                                    "_id": $(this).attr("restaurant_id")
+                                },
+                                dataType: "json",
+                                success: function (response) {
+                                    $("#loader").hide();
+                                    $("#menu-success").addClass("menu-active");
+                                    $("#ok").click(function (e) {
+                                        e.preventDefault();
+                                        location.reload();
+                                    });
+                                },
+                                error: function (response) {
+                                    $("#loader").hide();
+                                    $("#button").show();
+                                    $("#menu-warning").addClass("menu-active");
+                                    $("#error").text(response.responseText);
+                                }
+                            });
+                        });
                 }
             });
         });

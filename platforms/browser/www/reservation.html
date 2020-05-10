@@ -88,10 +88,32 @@
             <span id="button"
                 class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Make
                 reservation</span>
-            <!-- <div class="preload-spinner2 border-highlight" id="loader"></div> -->
+            <div class="preload-spinner2 border-highlight" id="loader"></div>
+
         </div>
 
         <div class="menu-hider"></div>
+        <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large"
+            data-menu-height="320" data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Successful reservation</h1>
+            <p class="boxed-text-large color-white">
+                You have successfully made a reservation!
+            </p>
+            <a href="main.html"
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+        </div>
+        <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
+            data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
+            <p class="boxed-text-large color-white" id="error">
+
+            </p>
+            <a href=""
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
+                Back</a>
+        </div>
     </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
@@ -102,9 +124,11 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const id = urlParams.get('id')
+            $("#loader").hide();
 
             $("#button").on("click", function () {
-
+                $("#button").hide();
+                $("#loader").show();
 
                 $.ajax({
                     type: "post",
@@ -118,9 +142,16 @@
                         "date": $("#date").val(),
                         "time": $("#time").val()
                     },
-                    dataType: "json",
+                    // dataType: "json",
                     success: function (response) {
-
+                        $("#loader").hide();
+                        $("#menu-success").addClass("menu-active");
+                    },
+                    error: function (response,error) {
+                        $("#loader").hide();
+                        $("#button").show();
+                        $("#menu-warning").addClass("menu-active");
+                        $("#error").text(response.responseText);
                     }
                 });
             });
