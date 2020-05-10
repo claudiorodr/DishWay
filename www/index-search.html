@@ -45,7 +45,7 @@
                         <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark"></i></a>
                     </div>
                 </div>
-                <div class="search-results disabled-search-list content-boxed shadow-large" >
+                <div class="search-results disabled-search-list content-boxed shadow-large">
                     <div class="content" id="list">
                         <!-- <div data-filter-item data-filter-name="all products eazy mobile" class="search-result-list">
                             <img class="shadow-large image-resize" src="images/pictures/32s.jpg" alt="img">
@@ -55,6 +55,12 @@
                             </p>
                             <a href="#" class="bg-highlight" id="1234567">VIEW</a>
                         </div> -->
+                        <div id="nothing" class="search-no-results disabled">
+                            <h3 class="bold top-10">Nothing found...</h3>
+                            <span class="under-heading font-11 opacity-70 color-theme">There's
+                                nothing matching the
+                                description you're looking for, try a different keyword.</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,50 +74,43 @@
     <script type="text/javascript" src="scripts/custom.js"></script>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                type: "get",
-                url: "http://127.0.0.1:3001/api/restaurants/list",
-                dataType: "json",
-                success: function (response) {
-                    for (let i = 0; i < response.length; i++) {
-                        $("#list").append(` <div data-filter-item data-filter-name="` + response[i]
-                            .restaurant.name.toLowerCase() +
-                            `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
-                            response[i].restaurant.featured_image + `" alt="img"> <h1>` +
-                            response[i].restaurant.name + `</h1> <p>` + response[i].restaurant
-                            .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[
-                                i].restaurant.id + `">VIEW</a> </div>`);
-                    }
-                }
-            });
-            $(selector).(function (e) { 
-                e.preventDefault();
-                
-            });
-            $(document).on('keypress', function (e) {
-                if (e.which == 13) {
                     $.ajax({
-                        type: "get",
-                        url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
-                            "#search").val(),
-                        dataType: "json",
-                        success: function (response) {
-                            $("list").hide();
-                            for (let i = 0; i < response.length; i++) {
-                                $("#list").append(
-                                    ` <div data-filter-item data-filter-name="` +
-                                    response[i].restaurant.name.toLowerCase() +
-                                    `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
-                                    response[i].restaurant.featured_image +
-                                    `" alt="img"> <h1>` + response[i].restaurant.name +
-                                    `</h1> <p>` + response[i].restaurant.cuisines +
-                                    `</p> <a href="#" class="bg-highlight" id="` +
-                                    response[i].restaurant.id + `">VIEW</a> </div>`);
+                            type: "get",
+                            url: "http://127.0.0.1:3001/api/restaurants/list",
+                            dataType: "json",
+                            success: function (response) {
+                                for (let i = 0; i < response.length; i++) {
+                                    $("#list").append(` <div data-filter-item data-filter-name="` + response[i] .restaurant.name.toLowerCase() + `" class="search-result-list"> <img class="shadow-large image-resize" src="` + response[i].restaurant.featured_image + `" alt="img"> <h1>` + response[i].restaurant.name + `</h1> <p>` + response[i].restaurant .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[ i].restaurant.id + `">VIEW</a> </div>`);
+                                    }
+                                }
+                            });
+
+                        $(document).on('keypress', function (e) {
+                            if (e.which == 13) {
+                                $.ajax({
+                                    type: "get",
+                                    url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                                        "#search").val(),
+                                    dataType: "json",
+                                    success: function (response) {
+                                        $("list").hide();
+                                        for (let i = 0; i < response.length; i++) {
+                                            $("#list").append(
+                                                ` <div data-filter-item data-filter-name="` +
+                                                response[i].restaurant.name.toLowerCase() +
+                                                `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
+                                                response[i].restaurant.featured_image +
+                                                `" alt="img"> <h1>` + response[i].restaurant
+                                                .name +
+                                                `</h1> <p>` + response[i].restaurant.cuisines +
+                                                `</p> <a href="#" class="bg-highlight" id="` +
+                                                response[i].restaurant.id + `">VIEW</a> </div>`);
+                                        }
+                                    }
+                                });
                             }
-                        }
+                        });
+
                     });
-                }
-            });
-        });
     </script>
 </body>
