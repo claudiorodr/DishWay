@@ -42,19 +42,11 @@
                     <div class="search search-header">
                         <i class="fa fa-search"></i>
                         <input id="search" type="text" placeholder="What are you looking for?" data-search>
-                        <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark"></i></a>
+                        <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark" id="delete"></i></a>
                     </div>
                 </div>
-                <div class="search-results disabled-search-list content-boxed shadow-large" >
+                <div class="search-results disabled-search-list content-boxed shadow-large">
                     <div class="content" id="list">
-                        <!-- <div data-filter-item data-filter-name="all products eazy mobile" class="search-result-list">
-                            <img class="shadow-large image-resize" src="images/pictures/32s.jpg" alt="img">
-                            <h1>Eazy | Mobile Website</h1>
-                            <p>
-                                Funcahl, Madeira
-                            </p>
-                            <a href="#" class="bg-highlight" id="1234567">VIEW</a>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -73,21 +65,22 @@
                 url: "http://127.0.0.1:3001/api/restaurants/list",
                 dataType: "json",
                 success: function (response) {
+
                     for (let i = 0; i < response.length; i++) {
+                        if (!response[i].restaurant.featured_image) {
+                            response[i].restaurant.featured_image = "https://cdn1.vectorstock.com/i/1000x1000/02/25/restaurant-color-icon-vector-8500225.jpg"
+                        }
                         $("#list").append(` <div data-filter-item data-filter-name="` + response[i]
                             .restaurant.name.toLowerCase() +
                             `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
                             response[i].restaurant.featured_image + `" alt="img"> <h1>` +
                             response[i].restaurant.name + `</h1> <p>` + response[i].restaurant
-                            .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[
-                                i].restaurant.id + `">VIEW</a> </div>`);
+                                .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[
+                                    i].restaurant.id + `">VIEW</a> </div>`);
                     }
                 }
             });
-            $(selector).(function (e) { 
-                e.preventDefault();
-                
-            });
+
             $(document).on('keypress', function (e) {
                 if (e.which == 13) {
                     $.ajax({
@@ -96,10 +89,19 @@
                             "#search").val(),
                         dataType: "json",
                         success: function (response) {
-                            $("list").hide();
+                            //$("#list").empty();
+                            //$("#list").hide();
+
+                            if ($(".search-result-list").prop('id') != "server_side") {
+                                $(".search-result-list").hide();
+                            }
+
                             for (let i = 0; i < response.length; i++) {
+                                if (!response[i].restaurant.featured_image) {
+                                    response[i].restaurant.featured_image = "https://cdn1.vectorstock.com/i/1000x1000/02/25/restaurant-color-icon-vector-8500225.jpg"
+                                }
                                 $("#list").append(
-                                    ` <div data-filter-item data-filter-name="` +
+                                    ` <div id="server_side" data-filter-item data-filter-name="` +
                                     response[i].restaurant.name.toLowerCase() +
                                     `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
                                     response[i].restaurant.featured_image +
@@ -112,6 +114,45 @@
                     });
                 }
             });
+
+            $("#delete").click(function (e) {
+                e.preventDefault();
+
+                //$("#list").empty();
+                //pesquisa();
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                        "#search").val(),
+                    dataType: "json",
+                    success: function () {
+                        //$("#list").empty();
+
+                        if ($(".search-result-list").is("#server_side")) {
+                            $('#server_side').remove();
+                        }
+
+                    }
+                });
+            });
+
+/*             $("#search").keypress(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                        "#search").val(),
+                    dataType: "json",
+                    success: function () {
+                        //$("#list").empty();
+
+                        
+
+                    }
+                });
+            }); */
+
         });
     </script>
 </body>
