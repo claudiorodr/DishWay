@@ -47,6 +47,20 @@
                 </div>
                 <div class="search-results disabled-search-list content-boxed shadow-large">
                     <div class="content" id="list">
+                        <!-- <div data-filter-item data-filter-name="all products eazy mobile" class="search-result-list">
+                            <img class="shadow-large image-resize" src="images/pictures/32s.jpg" alt="img">
+                            <h1>Eazy | Mobile Website</h1>
+                            <p>
+                                Funcahl, Madeira
+                            </p>
+                            <a href="#" class="bg-highlight" id="1234567">VIEW</a>
+                        </div> -->
+                        <div id="nothing" class="search-no-results disabled">
+                            <h3 class="bold top-10">Nothing found...</h3>
+                            <span class="under-heading font-11 opacity-70 color-theme">There's
+                                nothing matching the
+                                description you're looking for, try a different keyword.</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,7 +124,8 @@
                                     `</p> <a href="#" class="bg-highlight" id="` +
                                     response[i].restaurant.id + `">VIEW</a> </div>`);
                             }
-                        }
+                        });
+
                     });
                 }
             });

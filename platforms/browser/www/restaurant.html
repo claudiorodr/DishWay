@@ -52,9 +52,9 @@
                     <h1 id="rating" class="font-500 color-yellow1-dark" style="margin-left: 110px"></h1>
                 </div>
 
-                <!--                 <div class="caption-center right-20">
+                <div class="caption-center right-20">
                     <p class="text-right color-green1-dark bottom-0"></p>
-                </div> -->
+                </div>
                 <div class="caption-center left-20">
                     <h1 id="name" class="color-white bolder"></h1>
                     <p id="meals" class="under-heading color-white opacity-90 bottom-0">
@@ -129,8 +129,8 @@
                     <i class="fa fa-star color-yellow1-dark font-18 left-5"></i>
                 </p>
                 <div id="review2" class="content bottom-15">
-                    <!--                     <div id="review2" class="single-slider owl-carousel owl-no-dots">
-                         <div>
+                    <div id="review2" class="single-slider owl-carousel owl-no-dots">
+                        <div>
                             <p class="font-18 thin center-text line-height-huge bottom-15">
                                 The code is always great with any Enabled template, but it's the customer support that
                                 wins me over always.
@@ -142,12 +142,13 @@
                                 Recommended.
                             </p>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="content bottom-0">
                     <div class="text-center">
-                        <a href="#" class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
+                        <a href="#" id="page_review"
+                            class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
                             Reviews!</a><br>
                     </div>
                 </div>
@@ -192,9 +193,9 @@
         <div class="menu-hider"></div>
 
     </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
     <script>
         $(document).ready(function () {
             var storage = window.localStorage;
@@ -213,6 +214,9 @@
                 },
                 success: function (result) {
                     $(function () {
+                        storage.setItem('restaurant_name', result.restaurant.name) // Pass a key name and its value to add or update that key.
+                        storage.setItem('restaurant_address', result.restaurant.location.locality_verbose) // Pass a key name and its value to add or update that key.
+
                         if (result.restaurant.price_range == 1) {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Cheap</span><strong>This restaurant is considered very cheap!</strong><em class="color-green1-dark">Cheap</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
@@ -238,8 +242,7 @@
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-green1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
-                        }
-                        else {
+                        } else {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
@@ -249,50 +252,81 @@
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant has vegetarian food!</strong><em class="color-red1-dark">Vegetarian</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
-                        }
-                        else {
+                        } else {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant does not have vegetarian food!</strong><em class="color-red1-dark">No Vegetarian</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
 
-                        if (result.restaurant.highlights.includes("Air Conditioned")) {
+                        if (result.restaurant.highlights.includes("Air Conditioning")) {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioned</span><strong>This restaurant has air conditioned!</strong><em class="color-red1-dark">Air Conditioned</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioning</span><strong>This restaurant has air conditioning!</strong><em class="color-red1-dark">Air conditioning</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
-                        }
-                        else {
+                        } else {
                             $('#info').append(
-                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioned</span><strong>This restaurant does not have air conditioned!</strong><em class="color-red1-dark">No Air Conditioned</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioning</span><strong>This restaurant does not have air conditioning!</strong><em class="color-red1-dark">No AC</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                             )
                         }
 
-                        for (let i = 0; i < result.restaurant.photo_count; i++) {
-                            // $('#photos').append(' <a class="default-link" data-lightbox="gallery-1" href="' + result.restaurant.photos[i].photo.url + '" title="Vynil and Typerwritter"><img src="' + result.restaurant.photos[i].photo.thumb_url + '" data-src="' + result.restaurant.photos[i].photo.thumb_url + '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>')
+                        if (result.restaurant.photo_count < 10 && result.restaurant
+                            .photo_count > 0) {
+                            for (let i = 0; i < result.restaurant.photo_count; i++) {
+                                $('#photos').append(
+                                    ' <a class="default-link" data-lightbox="gallery-1" href="' +
+                                    result.restaurant.photos[i].photo.url +
+                                    '" title="Vynil and Typerwritter"><img src="' +
+                                    result.restaurant.photos[i].photo.thumb_url +
+                                    '" data-src="' + result.restaurant.photos[i].photo
+                                    .thumb_url +
+                                    '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
+                                )
+                            }
+                        } else {
+                            for (let i = 0; i < 9; i++) {
+                                $('#photos').append(
+                                    ' <a class="default-link" data-lightbox="gallery-1" href="' +
+                                    result.restaurant.photos[i].photo.url +
+                                    '" title="Vynil and Typerwritter"><img src="' +
+                                    result.restaurant.photos[i].photo.thumb_url +
+                                    '" data-src="' + result.restaurant.photos[i].photo
+                                    .thumb_url +
+                                    '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
+                                )
+                            }
                         }
+
                         if (result.restaurant.user_rating.aggregate_rating == 0) {
                             $("#rating").text("N.A. / 5.0");
 
                             $('#stars').append('<div class="review-stars">')
                             for (i = 0; i < 5; i++) {
-                                $('#stars').append('<i class="far fa-star color-red1-dark font-18"></i>')
+                                $('#stars').append(
+                                    '<i class="far fa-star color-red1-dark font-18"></i>'
+                                )
                             }
                             $('#stars').append('</div>')
-                        }
-                        else {
-                            $("#rating").text(result.restaurant.user_rating.aggregate_rating + " / 5.0");
+                        } else {
+                            $("#rating").text(result.restaurant.user_rating
+                                .aggregate_rating + " / 5.0");
 
                             $('#stars').append('<div class="review-stars">')
-                            for (i = 0; i < parseInt(result.restaurant.user_rating.aggregate_rating); i++) {
-                                $('#stars').append('<i class="fa fa-star color-yellow1-dark font-18"></i>')
+                            for (i = 0; i < parseInt(result.restaurant.user_rating
+                                    .aggregate_rating); i++) {
+                                $('#stars').append(
+                                    '<i class="fa fa-star color-yellow1-dark font-18"></i>'
+                                )
                             }
-                            for (i = 0; i < 5 - parseInt(result.restaurant.user_rating.aggregate_rating); i++) {
-                                $('#stars').append('<i class="far fa-star color-yellow1-dark font-18"></i>')
+                            for (i = 0; i < 5 - parseInt(result.restaurant.user_rating
+                                    .aggregate_rating); i++) {
+                                $('#stars').append(
+                                    '<i class="far fa-star color-yellow1-dark font-18"></i>'
+                                )
                             }
                             $('#stars').append('</div>')
                         }
 
-                        $('.bg-29').css('background-image', 'url("' + result.restaurant.featured_image + '")');
+                        $('.bg-29').css('background-image', 'url("' + result.restaurant
+                            .featured_image + '")');
                         $("#name").text(result.restaurant.name);
                         $("#meals").text(result.restaurant.cuisines);
                         $("#opening").text(result.restaurant.timings);
@@ -312,13 +346,20 @@
                         var lat = result.restaurant.location.latitude;
                         var lng = result.restaurant.location.longitude;
 
-                        var myLatLng = { lat: lat, lng: lng };
+                        var myLatLng = {
+                            lat: lat,
+                            lng: lng
+                        };
 
                         var marker = new google.maps.Marker({
                             map: map,
                             position: myLatLng,
                         });
-                        $("#map").attr("src", 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng);
+                        $("#map").attr("src",
+                            'https://www.google.com/maps/search/?api=1&query=' +
+                            lat + ',' + lng);
+                        $("#page_review").hide()
+
                     });
                 },
                 error: function (request, error) {
