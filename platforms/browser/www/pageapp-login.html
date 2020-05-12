@@ -1,46 +1,61 @@
-<!DOCTYPE HTML>
-<html lang="en">
-
-<!-- Mirrored from www.enableds.com/products/stickymobile3/pageapp-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Feb 2020 22:23:48 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>StickyMobile</title>
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/framework.css">
-    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
-
-    <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
-    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
-</head>
-
-<body class="theme-light" data-background="none" data-highlight="red2">
     <div id="page">
+            <script>
+                $(document).ready(function () {
+                    $("#loader").hide();
+                    $("#login").on("click", function (e) {
+                        e.preventDefault();
+                        $("#login").hide();
+                        $("#loader").show();
+                        $.ajax({
+                            url: "http://127.0.0.1:3001/api/users/login",
+                            type: "post",
+                            // dataType: "json",
+                            data: {
+                                email: $("#email").val(),
+                                password: $("#password").val()
+                            },
+                            success: function (result) {
+                                var storage = window.localStorage;
+                                storage.setItem('token', result
+                                    .token) // Pass a key name and its value to add or update that key.
+                                storage.setItem('user_id', result
+                                    .user_id) // Pass a key name and its value to add or update that key.
+                                storage.setItem('user_name', result
+                                    .user_name) // Pass a key name and its value to add or update that key.
+                                $("#loader").hide();
+                                $("#menu-success").addClass("menu-active");
+                                // $("#login").attr("href", "pageapp-register.html");
+                            },
+                            error: function (response, error) {
+                                $("#loader").hide();
+                                $("#login").show();
+                                $("#menu-warning").addClass("menu-active");
+                                $("#error").text(response.responseText);
+
+                                // alert("Request: " + JSON.stringify(error));
+                            }
+                        });
+                    })
+                });
+            </script>
         <div id="page-preloader">
             <div class="loader-main">
                 <div class="preload-spinner border-highlight"></div>
             </div>
         </div>
-        <div class="header header-fixed header-logo-center">
+        <!-- <div class="header header-fixed header-logo-center">
             <a href="index.html" class="header-title">Sticky Mobile</a>
             <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
             <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
-        </div>
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
+        </div> -->
+        <!-- <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
             <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
             <a href="index-components.html"><i class="fa fa-star"></i><span>Features</span></a>
             <a href="index-pages.html" class="active-nav"><i class="fa fa-heart"></i><span>Pages</span></a>
             <a href="index-search.html"><i class="fa fa-search"></i><span>Search</span></a>
             <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
             <div class="clear"></div>
-        </div>
+        </div> -->
         <div class="page-content-black"></div>
         <div class="page-content">
             <div class="cover-wrapper cover-no-buttons">
@@ -55,8 +70,8 @@
                                 <div class="input-style input-light has-icon input-style-1 input-required">
                                     <i class="input-icon fa fa-user font-11"></i>
                                     <span>Username</span>
-                                    <em>(required)</em>
-                                    <input type="tel" placeholder="Username" name="email" id="email">
+                                    <em>(required)</em> 
+                                    <input type="email" placeholder="Email" name="email" id="email">
                                 </div>
                                 <div class="input-style input-light has-icon input-style-1 input-required bottom-30">
                                     <i class="input-icon fa fa-lock font-11"></i>
@@ -96,8 +111,8 @@
             <p class="boxed-text-large color-white">
                 You can now use your DishWay account and see hundreds of restaurants!
             </p>
-            <a href="main.html"
-                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+            <a href="index.html"
+                class="button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
         </div>
         <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
             data-menu-width="310" data-menu-effect="menu-over">
@@ -111,43 +126,3 @@
                 Back</a>
         </div>
     </div>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/plugins.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#loader").hide();
-            $("#login").on("click",function (e) {
-                 e.preventDefault();
-                 $("#login").hide();
-                 $("#loader").show();
-                $.ajax({
-                    url: "http://127.0.0.1:3001/api/users/login",
-                    type: "post",
-                    // dataType: "json",
-                    data: {
-                        email: $("#email").val(),
-                        password: $("#password").val()
-                    },
-                    success: function (result) {
-                        var storage = window.localStorage;
-                        storage.setItem('token', result.token) // Pass a key name and its value to add or update that key.
-                        storage.setItem('user_id', result.user_id) // Pass a key name and its value to add or update that key.
-                        storage.setItem('user_name', result.user_name) // Pass a key name and its value to add or update that key.
-                        $("#loader").hide();
-                        $("#menu-success").addClass("menu-active");
-                        // $("#login").attr("href", "pageapp-register.html");
-                    },
-                    error: function (response, error) {
-                        $("#loader").hide();
-                        $("#login").show();
-                        $("#menu-warning").addClass("menu-active");
-                        $("#error").text(response.responseText);
-
-                        // alert("Request: " + JSON.stringify(error));
-                    }
-                });
-            })
-        });
-    </script>
-    </body>
