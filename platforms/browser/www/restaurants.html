@@ -1,119 +1,113 @@
+<div id="page">
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const type = urlParams.get('type')
+            var url = "http://127.0.0.1:3001/api/restaurants/" + type
 
-    <div id="page">
-            <script type="text/javascript" charset="utf-8">
-                // $(document).ready(function () {
-                document.addEventListener("deviceready", onDeviceReady, false);
-                // });
-
-
-                function onDeviceReady() {
-                    $("#button").hide();
-                    $("#loader").hide();
-                    var page = 1
-                    $.ajax({
-                        type: "get",
-                        url: "http://127.0.0.1:3001/api/restaurants/rating",
-                        dataType: "json",
-                        data: {
-                            page: page,
-                            size: 10
-                        },
-                        success: function (response) {
-                            for (let i = response.length - 1; i >= 0; i--) {
-                                response[i].restaurant.location.locality = response[i].restaurant.location
-                                    .locality
-                                    .substr(0, 35)
-                                response[i].restaurant.name = response[i].restaurant.name.substr(0, 17)
-                                response[i].restaurant.location.address = response[i].restaurant.location
-                                    .address
-                                    .substr(0, 56)
-                                $('#restaurants').prepend(
-                                    ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
-                                    response[i].restaurant.location.address +
-                                    ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
-                                    response[i].restaurant.featured_image +
-                                    `');"> </div> </div> <div class="content bottom-10"> <div class="float-left"> <h1 class="bolder">` +
-                                    response[i].restaurant.name +
-                                    `</h1> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-10"></i>` +
-                                    response[i].restaurant.location.locality +
-                                    `</p> </div> <a href="restaurant.html?id=` + response[i].restaurant
-                                    .id +
-                                    `" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
-                                );
-                            }
-                            $("#button").show();
-                        }
-                    });
-
-                    $("#button").click(function (e) {
-                        e.preventDefault();
-                        page++
-                        $("#button").hide();
-                        $("#loader").show();
-
-                        $.ajax({
-                            type: "get",
-                            url: "http://127.0.0.1:3001/api/restaurants/rating",
-                            dataType: "json",
-                            data: {
-                                page: page,
-                                size: 10
-                            },
-                            success: function (response) {
-                                $("#loader").hide();
-                                $("#button").show();
-                                for (let i = 0; i < response.length; i++) {
-                                    response[i].restaurant.location.locality = response[i]
-                                        .restaurant
-                                        .location.locality.substr(0, 35)
-                                    response[i].restaurant.name = response[i].restaurant.name
-                                        .substr(0,
-                                            17)
-                                    response[i].restaurant.location.address = response[i].restaurant
-                                        .location.address.substr(0, 56)
-                                    $('#button').before(
-                                        ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
-                                        response[i].restaurant.location.address +
-                                        ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
-                                        response[i].restaurant.featured_image +
-                                        `');"> </div> </div> <div class="content bottom-10"> <div class="float-left"> <h1 class="bolder">` +
-                                        response[i].restaurant.name +
-                                        `</h1> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-10"></i>` +
-                                        response[i].restaurant.location.locality +
-                                        `</p> </div> <a href="#" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
-                                    );
-                                }
-                            }
-                        });
-
-                    });
-
+            if (type == null) {
+                url = "http://127.0.0.1:3001/api/restaurants/list"
+            }
+            $("#footer").load("footer.html");
+            $("#button").hide();
+            $("#loader").hide();
+            var page = 1
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "json",
+                data: {
+                    page: page,
+                    size: 10
+                },
+                success: function (response) {
+                    for (let i = response.length - 1; i >= 0; i--) {
+                        response[i].restaurant.location.locality = response[i].restaurant.location
+                            .locality.substr(0, 32) 
+                        response[i].restaurant.name = response[i].restaurant.name.substr(0, 16)
+                        response[i].restaurant.location.address = response[i].restaurant.location
+                            .address.substr(0, 56)
+                        $('#restaurants').prepend(
+                            ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
+                            response[i].restaurant.location.address +
+                            ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
+                            response[i].restaurant.featured_image +
+                            `');"> </div> </div> <div class="content bottom-10"> <div class="float-left"> <h3 class="bolder">` +
+                            response[i].restaurant.name +
+                            `</h3> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-8"></i>` +
+                            response[i].restaurant.location.locality +
+                            `</p> </div> <a href="restaurant.html?id=` + response[i].restaurant
+                            .id +
+                            `" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
+                        );
+                    }
+                    $("#button").show();
                 }
-            </script>
-        <div id="page-preloader">
-            <div class="loader-main">
-                <div class="preload-spinner border-highlight"></div>
-            </div>
-        </div>
-        <div class="header header-fixed header-logo-center">
-            <a href="index.html" class="header-title">Sticky Mobile</a>
-            <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
-            <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
-        </div>
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-            <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="index-components.html"><i class="fa fa-star"></i><span>Features</span></a>
-            <a href="index-pages.html" class="active-nav"><i class="fa fa-heart"></i><span>Pages</span></a>
-            <a href="index-search.html"><i class="fa fa-search"></i><span>Search</span></a>
-            <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
-            <div class="clear"></div>
-        </div>
-        <div class="page-content header-clear-medium" id="restaurants">
-            <span id="button"
-                class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
-                more restaurants</span>
-            <div class="preload-spinner2 border-highlight" id="loader"></div>
-        </div>
+            });
 
-        <div class="menu-hider"></div>
+            $("#button").click(function (e) {
+                e.preventDefault();
+                page++
+                $("#button").hide();
+                $("#loader").show();
+
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/" + type,
+                    dataType: "json",
+                    data: {
+                        page: page,
+                        size: 10
+                    },
+                    success: function (response) {
+                        $("#loader").hide();
+                        $("#button").show();
+                        for (let i = 0; i < response.length; i++) {
+                            response[i].restaurant.location.locality = response[i]
+                                .restaurant
+                                .location.locality.substr(0, 32)
+                            response[i].restaurant.name = response[i].restaurant.name
+                                .substr(0,
+                                    16)
+                            response[i].restaurant.location.address = response[i].restaurant
+                                .location.address.substr(0, 56)
+                            $('#button').before(
+                                ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
+                                response[i].restaurant.location.address +
+                                ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
+                                response[i].restaurant.featured_image +
+                                `');"> </div> </div> <div class="content bottom-10"> <div class="float-left"> <h3 class="bolder">` +
+                                response[i].restaurant.name +
+                                `</h3> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-8"></i>` +
+                                response[i].restaurant.location.locality +
+                                `</p> </div> <a href="#" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
+                            );
+                        }
+                    }
+                });
+
+            });
+
+        });
+    </script>
+    <div id="page-preloader">
+        <div class="loader-main">
+            <div class="preload-spinner border-highlight"></div>
+        </div>
     </div>
+    <div class="header header-fixed header-logo-center">
+        <a href="index.html" class="header-title">Sticky Mobile</a>
+        <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+        <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
+    </div>
+    <div id="footer"></div>
+    <div class="page-content header-clear-medium" id="restaurants">
+        <span id="button"
+            class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
+            more restaurants</span>
+        <div class="preload-spinner2 border-highlight" id="loader"></div>
+    </div>
+
+    <div class="menu-hider"></div>
+</div>
