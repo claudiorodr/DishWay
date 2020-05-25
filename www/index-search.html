@@ -1,68 +1,65 @@
     <div id="page">
-            <script>
-                $(document).ready(function () {
-                    $.ajax({
-                        type: "get",
-                        url: "http://127.0.0.1:3001/api/restaurants/list",
-                        dataType: "json",
-                        success: function (response) {
-                            for (let i = 0; i < response.length; i++) {
-                                $("#list").append(` <div data-filter-item data-filter-name="` +
-                                    response[i].restaurant.name.toLowerCase() +
-                                    `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
-                                    response[i].restaurant.featured_image +
-                                    `" alt="img"> <h1>` + response[i].restaurant.name +
-                                    `</h1> <p>` + response[i].restaurant.cuisines +
-                                    `</p> <a href="#" class="bg-highlight" id="` + response[i]
-                                    .restaurant.id + `">VIEW</a> </div>`);
-                            }
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/list",
+                    dataType: "json",
+                    success: function (response) {
+                        for (let i = 0; i < response.length; i++) {
+                            $("#list").append(` <div data-filter-item data-filter-name="` +
+                                response[i].restaurant.name.toLowerCase() +
+                                `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
+                                response[i].restaurant.featured_image +
+                                `" alt="img"> <h1>` + response[i].restaurant.name +
+                                `</h1> <p>` + response[i].restaurant.cuisines +
+                                `</p> <a href=" restaurant.html?id=` + response[i].restaurant.id +`"
+                                    class="bg-highlight" id="` + response[i]
+                                .restaurant.id + `">VIEW</a> </div>`);
                         }
-                    });
-
-                    $(document).on('keypress', function (e) {
-                        if (e.which == 13) {
-                            $.ajax({
-                                type: "get",
-                                url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
-                                    "#search").val(),
-                                dataType: "json",
-                                success: function (response) {
-                                    $("list").hide();
-                                    for (let i = 0; i < response.length; i++) {
-                                        $("#list").append(
-                                            ` <div data-filter-item data-filter-name="` +
-                                            response[i].restaurant.name.toLowerCase() +
-                                            `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
-                                            response[i].restaurant.featured_image +
-                                            `" alt="img"> <h1>` + response[i].restaurant
-                                            .name +
-                                            `</h1> <p>` + response[i].restaurant
-                                            .cuisines +
-                                            `</p> <a href="#" class="bg-highlight" id="` +
-                                            response[i].restaurant.id +
-                                            `">VIEW</a> </div>`);
-                                    }
-                                }
-                            });
-                        }
-                    });
-
+                    }
                 });
-            </script>
+
+                $(document).on('keypress', function (e) {
+                    if (e.which == 13) {
+                        $.ajax({
+                            type: "get",
+                            url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                                "#search").val(),
+                            dataType: "json",
+                            success: function (response) {
+                                $("list").hide();
+                                for (let i = 0; i < response.length; i++) {
+                                    $("#list").append(
+                                        ` <div data-filter-item data-filter-name="` +
+                                        response[i].restaurant.name.toLowerCase() +
+                                        `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
+                                        response[i].restaurant.featured_image +
+                                        `" alt="img"> <h1>` + response[i].restaurant.name +
+                                        `</h1> <p>` + response[i].restaurant.cuisines +
+                                        `</p> <a href="restaurant.html?id=` + response[i].restaurant.id +` " class="bg-highlight" id="` +
+                                        response[i].restaurant.id +
+                                        `">VIEW</a> </div>`);
+                                }
+                            }
+                        });
+                    }
+                });
+
+            });
+        </script>
 
         <div id="page-preloader">
             <div class="loader-main">
                 <div class="preload-spinner border-highlight"></div>
             </div>
         </div>
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-            <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="index-components.html"><i class="fa fa-star"></i><span>Features</span></a>
-            <a href="index-pages.html"><i class="fa fa-heart"></i><span>Pages</span></a>
-            <a href="index-search.html" class="active-nav"><i class="fa fa-search"></i><span>Search</span></a>
-            <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
-            <div class="clear"></div>
-        </div>
+        <div id="footer"></div>
+        <script>
+            $("#footer").load("footer.html", function () {
+                $('div#footer a[href="index-search.html"]').addClass("active-nav");
+            });
+        </script>
         <div class="page-content header-clear-small">
             <div class="search-page">
                 <div class="content-boxed content-boxed-full shadow-large bottom-15">

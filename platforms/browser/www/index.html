@@ -10,8 +10,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        media-src *; font-src 'self' https://fonts.gstatic.com;" />
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"> -->
 
     <title>DISHWAY</title>
     <link
@@ -22,31 +24,31 @@
 
     <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
     <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="scripts/jquery.js"></script>
-        <script type="text/javascript" src="scripts/plugins.js"></script>
-        <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
 </head>
 
 <body class="theme-light" data-background="none" data-highlight="red2">
     <div id="page">
-        <script>
-            $(document).ready(function () {
-                $("#footer").load("footer.html");
-            });
-        </script>
         <div id="page-preloader">
             <div class="loader-main">
                 <div class="preload-spinner border-highlight"></div>
             </div>
         </div>
         <div class="header header-fixed header-logo-center">
-            <a href="index.html" class="header-title">Sticky Mobile</a>
+            <a href="index.html" class="header-title">DishWay</a>
             <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
             <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
         </div>
         <div id="footer"></div>
+        <script>
+            $("#footer").load("footer.html", function () {
+                $('div#footer a[href="index.html"]').addClass("active-nav");
+            });
+        </script>
         <div class="page-content header-clear-medium">
             <a href="restaurants.html?type=popular">
                 <div data-height="175" class="caption caption-margins round-medium shadow-large">
@@ -117,5 +119,9 @@
 
         <div class="menu-hider"></div>
     </div>
+
+    <script>
+        $(document).ready(function () {});
+    </script>
 
 </body>

@@ -9,9 +9,9 @@
             if (type == null) {
                 url = "http://127.0.0.1:3001/api/restaurants/list"
             }
-            $("#footer").load("footer.html");
             $("#button").hide();
             $("#loader").hide();
+            $("#loader2").show();
             var page = 1
             $.ajax({
                 type: "get",
@@ -24,7 +24,7 @@
                 success: function (response) {
                     for (let i = response.length - 1; i >= 0; i--) {
                         response[i].restaurant.location.locality = response[i].restaurant.location
-                            .locality.substr(0, 32) 
+                            .locality.substr(0, 32)
                         response[i].restaurant.name = response[i].restaurant.name.substr(0, 16)
                         response[i].restaurant.location.address = response[i].restaurant.location
                             .address.substr(0, 56)
@@ -81,7 +81,12 @@
                                 response[i].restaurant.name +
                                 `</h3> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-8"></i>` +
                                 response[i].restaurant.location.locality +
-                                `</p> </div> <a href="#" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
+                                `</p>
+                                </div> <a href="restaurant.html?id=` + response[i].restaurant
+                                .id +
+                                `" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View
+                                    restaurant</a> </div>
+                                </div>`
                             );
                         }
                     }
@@ -96,18 +101,27 @@
             <div class="preload-spinner border-highlight"></div>
         </div>
     </div>
+
+    
     <div class="header header-fixed header-logo-center">
-        <a href="index.html" class="header-title">Sticky Mobile</a>
+        <a href="index.html" class="header-title">DishWay</a>
         <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
         <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
     </div>
     <div id="footer"></div>
+    <script>
+        $("#footer").load("footer.html", function () {
+            $('div#footer a[href="restaurants.html"]').addClass("active-nav");
+        });
+        </script>
     <div class="page-content header-clear-medium" id="restaurants">
+        <div class="preload-spinner3 border-highlight" id="loader2"></div>
         <span id="button"
-            class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
-            more restaurants</span>
+        class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
+        more restaurants</span>
         <div class="preload-spinner2 border-highlight" id="loader"></div>
     </div>
+
 
     <div class="menu-hider"></div>
 </div>
