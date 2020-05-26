@@ -27,53 +27,53 @@
 
                             if (result.restaurant.price_range == 1) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Cheap</span><strong>This restaurant is considered very cheap!</strong><em class="color-green1-dark">Cheap</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Barato</span><strong>Este restaurante é considerado económico!</strong><em class="color-green1-dark">Económico</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             }
                             if (result.restaurant.price_range == 2) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Regular price</span><strong>This restaurant is considered medium price!</strong><em class="color-yellow1-dark">Medium</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Preço médio</span><strong>Este restaurante é considerado normal!</strong><em class="color-yellow1-dark">Médio</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             }
                             if (result.restaurant.price_range == 3) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Regular price</span><strong>This restaurant is considered medium price!</strong><em class="color-yellow1-dark">Medium</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Preço médio</span><strong>Este restaurante é considerado normal!</strong><em class="color-yellow1-dark">Médio</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             }
                             if (result.restaurant.price_range == 4) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Expensive</span><strong>This restaurant is considered expensive!</strong><em class="color-red1-dark">Expensive</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-dollar-sign color-green2-dark"></i><span>Caro</span><strong>Este restaurante é considerado dispendioso!</strong><em class="color-red1-dark">Dispendioso</em><i class="fa fa-check-circle color-red1-dark"></i></a></div>'
                                 )
                             }
 
                             if (result.restaurant.has_online_delivery == 1) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has delivery service!</strong><em class="color-green1-dark">Delivery</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Entrega</span><strong>Este restaurante possui serviço de entrega!</strong><em class="color-green1-dark">Entrega</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             } else {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Delivery</span><strong>This restaurant has no delivery service!</strong><em class="color-red1-dark">No Delivery</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fa fa-truck color-blue1-dark"></i><span>Entrega</span><strong>Este restaurante não possui serviço de entrega!</strong><em class="color-red1-dark">Não Entrega</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                                 )
                             }
 
                             if (result.restaurant.highlights.includes("Credit Card")) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant has vegetarian food!</strong><em class="color-red1-dark">Vegetarian</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Comida Vegetariana</span><strong>Este restaurante possui comida vegetariana!</strong><em class="color-red1-dark">Vegetariano</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             } else {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Vegetarian Food</span><strong>This restaurant does not have vegetarian food!</strong><em class="color-red1-dark">No Vegetarian</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-utensils"></i><span>Comida Vegetariana</span><strong>Este restaurante não possui comida vegetariana!</strong><em class="color-red1-dark">Sem Vegetariano</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                                 )
                             }
 
                             if (result.restaurant.highlights.includes(
                                     "Air Conditioning")) {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioning</span><strong>This restaurant has air conditioning!</strong><em class="color-red1-dark">Air conditioning</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Ar Condicionado</span><strong>Este restaurante possui ar condicionado!</strong><em class="color-red1-dark">Ar Condicionado</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                                 )
                             } else {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioning</span><strong>This restaurant does not have air conditioning!</strong><em class="color-red1-dark">No AC</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Ar Condicionado</span><strong>Este restaurante não possui ar condicionado!</strong><em class="color-red1-dark">Sem Ar Condicionado</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                                 )
                             }
 
@@ -218,8 +218,7 @@
                     </p>
                 </div>
                 <div class="caption-bottom text-center">
-                    <a href="#" id="book" class="button button-xl shadow-large button-round-small bg-red2-dark">Book
-                        now!</a><br>
+                    <a href="#" id="book" class="button button-xl shadow-large button-round-small bg-red2-dark">Reserva já!</a><br>
                 </div>
                 <div class="caption-overlay bg-black opacity-70"></div>
                 <div class="caption-bg bg-29"></div>
@@ -228,28 +227,28 @@
                 <div class="content bottom-0">
                     <div class="contact-information last-column">
                         <div class="container top-20">
-                            <h5 class="bolder"><i class="fa fa-calendar-alt fa-1x"></i> Opening hours</h5>
+                            <h5 class="bolder"><i class="fa fa-calendar-alt fa-1x"></i> Horário</h5>
                             <p id="opening" class="bottom-25"></p>
                             <h5 id="info" class="bolder"><i class="fas fa-info-circle color-black fa-1x"
                                     style="margin-bottom: 10px;"></i>
-                                Information</h5>
-                            <h5 class="bolder"><i class="fa fa-phone"></i> Contacts</h5>
+                                Informação</h5>
+                            <h5 class="bolder"><i class="fa fa-phone"></i> Contactos</h5>
                             <div class="link-list link-list-1">
                                 <a id="contact" href="tel:+1 234 567 8900">
                                     <i class="fa fa-phone color-green1-dark"></i>
                                     <span id="contact2"></span>
-                                    <em class="bg-highlight">TAP TO CALL</em>
+                                    <em class="bg-highlight">Clica para Ligar</em>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                                 <a href="mailto:mail@dishway.com">
                                     <i class="fa fa-envelope color-blue2-dark"></i>
                                     <span>mail@dishway.com</span>
-                                    <em class="bg-highlight">TAP TO MAIL</em>
+                                    <em class="bg-highlight">Clica para enviar email</em>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
                             <br>
-                            <h5 class="bolder"><i class="fas fa-map-marker color-black fa-1x"></i> Postal Information
+                            <h5 class="bolder"><i class="fas fa-map-marker color-black fa-1x"></i> Endereço
                             </h5>
                             <p id="address"></p>
                             <div class="divider bottom-0"></div>
@@ -258,7 +257,7 @@
                 </div>
             </div>
             <div class="content-boxed">
-                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Gallery</h1>
+                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Galeria</h1>
                 <div class="left-15 right-15">
                     <div id="photos" class="gallery-views gallery-view-1">
 
@@ -267,7 +266,7 @@
                 </div>
             </div>
             <div class="content-boxed">
-                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Reviews</h1>
+                <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Avaliações</h1>
                 <p class="center-text bottom-30">
                     <i class="fa fa-star color-yellow1-dark font-18 right-5"></i>
                     <i class="fa fa-star color-yellow1-dark font-24 right-5"></i>
@@ -295,14 +294,13 @@
                 <div class="content bottom-0">
                     <div class="text-center">
                         <a href="#" id="page_review"
-                            class="button button-xl shadow-large button-round-small bg-yellow1-light">View more
-                            Reviews!</a><br>
+                            class="button button-xl shadow-large button-round-small bg-yellow1-light">Mostrar mais Avaliações!</a><br>
                     </div>
                 </div>
             </div>
             <div class="content content-boxed round-medium shadow-huge">
                 <div class="content">
-                    <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Location</h1>
+                    <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Localização</h1>
                 </div>
                 <div class="responsive-iframe bottom-0 add-iframe">
                     <iframe class="location-map" id="map"
@@ -323,7 +321,7 @@
                     <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
                         data-toggle-width="50" data-toggle-content="toggle-content-1"
                         data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
-                        <span class="color-theme regularbold font-13">Dark Mode</span>
+                        <span class="color-theme regularbold font-13">Modo Nocturno</span>
                         <strong></strong>
                         <u></u>
                     </a>
