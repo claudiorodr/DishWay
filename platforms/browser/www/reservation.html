@@ -1,73 +1,73 @@
-<!DOCTYPE HTML>
-<html lang="en">
-
-<!-- Mirrored from www.enableds.com/products/stickymobile3/component-inputs.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Feb 2020 22:22:14 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>StickyMobile</title>
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/framework.css">
-    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
-
-    <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
-    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
-</head>
-
-<body class="theme-light" data-background="none" data-highlight="red2">
     <div id="page">
+        <script>
+            $(document).ready(function () {
+                var storage = window.localStorage;
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const id = urlParams.get('id')
+                $("#loader").hide();
+                $("#footer").load("footer.html");
+                $("#button").on("click", function () {
+                    $("#button").hide();
+                    $("#loader").show();
+
+                    $.ajax({
+                        type: "post",
+                        url: "http://127.0.0.1:3001/api/reservations/new",
+                        data: {
+                            "user_id": storage.user_id,
+                            "restaurant_id": id,
+                            "restaurant_name": storage.restaurant_name,
+                            "restaurant_address": storage.restaurant_address,
+                            "number_guests": $("#number_guests option:selected").text(),
+                            "date": $("#date").val(),
+                            "time": $("#time").val()
+                        },
+                        // dataType: "json",
+                        success: function (response) {
+                            $("#loader").hide();
+                            $("#menu-success").addClass("menu-active");
+                        },
+                        error: function (response, error) {
+                            $("#loader").hide();
+                            $("#button").show();
+                            $("#menu-warning").addClass("menu-active");
+                            $("#error").text(response.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
         <div id="page-preloader">
             <div class="loader-main">
                 <div class="preload-spinner border-highlight"></div>
             </div>
         </div>
         <div class="header header-fixed header-logo-center">
-            <a href="index.html" class="header-title">Sticky Mobile</a>
+            <a href="index.html" class="header-title">DishWay</a>
             <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
             <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
         </div>
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-            <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="index-components.html" class="active-nav"><i class="fa fa-star"></i><span>Features</span></a>
-            <a href="index-pages.html"><i class="fa fa-heart"></i><span>Pages</span></a>
-            <a href="index-search.html"><i class="fa fa-search"></i><span>Search</span></a>
-            <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
-            <div class="clear"></div>
-        </div>
+        <div id="footer"></div>
+        <script>
+            $("#footer").load("footer.html", function () {
+                $('div#footer a[href="reservations.html"]').addClass("active-nav");
+            });
+        </script>
         <div class="page-content header-clear-medium">
-            <div data-height="130" class="caption caption-margins round-medium shadow-huge">
-                <div class="caption-center right-15 top-15 text-right">
-                    <a href="#" class="back-button button button-xs button-round-huge bg-highlight">Back Home</a>
-                </div>
-                <div class="caption-center left-15 text-left">
-                    <h1 class="color-white bolder">Inputs</h1>
-                    <p class="under-heading color-white opacity-90 bottom-0">
-                        Text, Email, Password and More.
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-70"></div>
-                <div class="caption-bg bg-18"></div>
-            </div>
             <div class="content-boxed">
                 <div class="content">
-                    <h3 class="bolder">Minimalist Fields</h3>
+                    <h3 class="bolder">Make your reservation</h3>
                     <p>
-                        These boxes will react to them when you type or select a value.
+                        Please insert the following details concerning your reservation.
                     </p>
                     <div class="input-style input-style-1 input-required">
-                        <span>Select your Birthday</span>
+                        <span>Select the date of your reservation</span>
                         <em><i class="fa fa-angle-down"></i></em>
                         <input type="date" id="date">
                     </div>
                     <div class="input-style input-style-1 input-required">
-                        <span>Select your Birthday</span>
+                        <span>Select the time of your reservation</span>
                         <em><i class="fa fa-angle-down"></i></em>
                         <input type="time" id="time">
                     </div>
@@ -115,46 +115,3 @@
                 Back</a>
         </div>
     </div>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/plugins.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
-    <script>
-        $(document).ready(function () {
-            var storage = window.localStorage;
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const id = urlParams.get('id')
-            $("#loader").hide();
-
-            $("#button").on("click", function () {
-                $("#button").hide();
-                $("#loader").show();
-
-                $.ajax({
-                    type: "post",
-                    url: "http://127.0.0.1:3001/api/reservations/new",
-                    data: {
-                        "user_id": storage.user_id,
-                        "restaurant_id": id,
-                        "restaurant_name": storage.restaurant_name,
-                        "restaurant_address": storage.restaurant_address,
-                        "number_guests": $("#number_guests option:selected").text(),
-                        "date": $("#date").val(),
-                        "time": $("#time").val()
-                    },
-                    // dataType: "json",
-                    success: function (response) {
-                        $("#loader").hide();
-                        $("#menu-success").addClass("menu-active");
-                    },
-                    error: function (response,error) {
-                        $("#loader").hide();
-                        $("#button").show();
-                        $("#menu-warning").addClass("menu-active");
-                        $("#error").text(response.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-</body>

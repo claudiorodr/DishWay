@@ -786,7 +786,7 @@ h5 {
 }
 
 .preload-spinner {
-    animation: preload-spin1 1.2s ease infinite;
+    animation: preload-spin2 1.2s ease infinite;
     clip: rect(0, 40px, 40px, 20px);
     height: 40px;
     width: 40px;
@@ -798,14 +798,27 @@ h5 {
 }
 
 .preload-spinner2 {
-    animation: preload-spin1 1.2s ease infinite;
+    animation: preload-spin2 1.2s ease infinite;
     clip: rect(0, 40px, 40px, 20px);
     height: 40px;
     width: 40px;
     /* position: absolute; */
     left: 50%;
     margin-left: -20px;
-    /* top: 50%; */
+    top: 80%;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
+
+.preload-spinner3 {
+    animation: preload-spin2 1.2s ease infinite;
+    clip: rect(0, 40px, 40px, 20px);
+    height: 40px;
+    width: 40px;
+    position: absolute; 
+    left: 50%;
+    margin-left: -20px;
+    top: 80%; 
     margin-top: -20px;
     margin-bottom: 15px;
 }
@@ -824,6 +837,19 @@ h5 {
 }
 
 .preload-spinner2:after {
+    animation: preload-spin2 1.2s ease-in-out infinite;
+    clip: rect(0, 40px, 40px, 20px);
+    content: '';
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    border-style: solid;
+    border-width: 3px;
+    border-color: inherit
+}
+
+.preload-spinner3:after {
     animation: preload-spin2 1.2s ease-in-out infinite;
     clip: rect(0, 40px, 40px, 20px);
     content: '';
