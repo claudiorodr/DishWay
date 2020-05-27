@@ -73,7 +73,7 @@
                                 )
                             } else {
                                 $('#info').append(
-                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Ar Condicionado</span><strong>Este restaurante não possui ar condicionado!</strong><em class="color-red1-dark">Sem Ar Condicionado</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
+                                    '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Ar Condicionado</span><strong>Este restaurante não possui ar condicionado!</strong><em class="color-red1-dark">Sem AC</em><i class="fa fa-times-circle color-red1-dark"></i></a></div>'
                                 )
                             }
 
@@ -149,7 +149,7 @@
                             $("#contact2").text(result.restaurant.phone_numbers);
                             $("#address").text(result.restaurant.location.address);
                             // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
-                            $("#book").attr("href", "reservation.html?id=" + id);
+                            $("#book").attr("href", "reservation-pt.html?id=" + id);
                             //Falta alterar isto
                             for (i = 0; i < 2; i++) {
                                 $('.content bottom-15 #review2').append(
@@ -198,8 +198,8 @@
         </div>
         <div id="footer"></div>
         <script>
-            $("#footer").load("footer.html", function () {
-                $('div#footer a[href="restaurants.html"]').addClass("active-nav");
+            $("#footer").load("footer-pt.html", function () {
+                $('div#footer a[href="restaurants-pt.html"]').addClass("active-nav");
             });
         </script>
         <div class="page-content header-clear-medium">

@@ -13,9 +13,9 @@
                             response[i].restaurant.featured_image +
                             `" alt="img"> <h1>` + response[i].restaurant.name +
                             `</h1> <p>` + response[i].restaurant.cuisines +
-                            `</p> <a href=" restaurant.html?id=` + response[i].restaurant.id + `"
+                            `</p> <a href=" restaurant-pt.html?id=` + response[i].restaurant.id + `"
                                     class="bg-highlight" id="` + response[i]
-                                .restaurant.id + `">VIEW</a> </div>`);
+                                .restaurant.id + `">VER</a> </div>`);
                     }
                 }
             });
@@ -37,9 +37,9 @@
                                     response[i].restaurant.featured_image +
                                     `" alt="img"> <h1>` + response[i].restaurant.name +
                                     `</h1> <p>` + response[i].restaurant.cuisines +
-                                    `</p> <a href="restaurant.html?id=` + response[i].restaurant.id + ` " class="bg-highlight" id="` +
+                                    `</p> <a href="restaurant-pt.html?id=` + response[i].restaurant.id + ` " class="bg-highlight" id="` +
                                     response[i].restaurant.id +
-                                    `">VIEW</a> </div>`);
+                                    `">VER</a> </div>`);
                             }
                         }
                     });
@@ -56,8 +56,8 @@
     </div>
     <div id="footer"></div>
     <script>
-        $("#footer").load("footer.html", function () {
-            $('div#footer a[href="index-search.html"]').addClass("active-nav");
+        $("#footer").load("footer-pt.html", function () {
+            $('div#footer a[href="index-search-pt.html"]').addClass("active-nav");
         });
     </script>
     <div class="page-content header-clear-small">
@@ -65,7 +65,7 @@
             <div class="content-boxed content-boxed-full shadow-large bottom-15">
                 <div class="search search-header">
                     <i class="fa fa-search"></i>
-                    <input id="search" type="text" placeholder="What are you looking for?" data-search>
+                    <input id="search" type="text" placeholder="Do que estás à procura?" data-search>
                     <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark" id="delete"></i></a>
                 </div>
             </div>
@@ -92,55 +92,66 @@
     </div>
 
     <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="310"
-        data-menu-effect="menu-over">
-        <div class="content bottom-0">
-            <div class="menu-title">
-                <h1>Settings</h1>
-                <p class="color-highlight">Flexible and Easy to Use</p><a href="#" class="close-menu"><i
-                        class="fa fa-times"></i></a>
-            </div>
-            <div class="divider bottom-20"></div>
-            <div class="toggle-with-icon">
-                <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
-                <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
-                    data-toggle-width="50" data-toggle-content="toggle-content-1"
-                    data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
-                    <span class="color-theme regularbold font-13">Dark Mode</span>
-                    <strong></strong>
-                    <u></u>
-                </a>
-            </div>
-            <div class="divider top-25 bottom-0"></div>
-            <div class="link-list link-list-1">
-                <a href="#" data-menu="menu-language">
-                    <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
-                    <span>Language</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
+    data-menu-effect="menu-over">
+    <div class="content bottom-0">
+        <div class="menu-title">
+            <h1>Definições</h1>
+            <a href="#" class="close-menu"><i
+                    class="fa fa-times"></i></a>
+        </div>
+        <div class="divider bottom-20"></div>
+        <div class="toggle-with-icon">
+            <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
+            <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
+                data-toggle-width="50" data-toggle-content="toggle-content-1"
+                data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
+                <span class="color-theme regularbold font-13">Modo Nocturno</span>
+                <strong></strong>
+                <u></u>
+            </a>
+        </div>
+        <div class="divider top-25 bottom-0"></div>
+        <div class="link-list link-list-1">
+            <a href="#" data-menu="menu-language">
+                <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
+                <span>Idioma</span>
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+        <div class="link-list link-list-1">
+            <a href="profile.html">
+                <i class="toggle-icon round-tiny fa fa-user bg-green2-dark color-white"></i>
+                <span>Perfil</span>
+                <i class="fa fa-angle-right"></i>
+            </a>
         </div>
     </div>
+</div>
 
-    <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
-        data-menu-effect="menu-over">
-        <div class="content bottom-0">
-            <h1 class="uppercase ultrabold top-20">Select your language</h1>
-            <p class="font-11 under-heading bottom-20">
-                You can direct to multiple languages of your page.
-            </p>
-            <div class="link-list link-list-1 link-list-long-border bottom-0">
-                <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
-                        class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/Portugal.png"><span>Portuguese</span><i
-                        class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/Germany.png"><span>German</span><i class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/Italy.png"><span>Italian</span><i class="fa fa-angle-right"></i></a>
-                <a href="#" class="no-border"><img src="images/flags/Spain.png"><span>Spanish</span><i
-                        class="fa fa-angle-right"></i></a>
-            </div>
-            <div class="clear"></div>
+<div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
+    data-menu-effect="menu-over">
+    <div class="content bottom-0">
+        <h1 class="uppercase ultrabold top-20">Seleciona o teu idioma</h1>
+        <p class="font-11 under-heading bottom-20">
+            Podes mudar o teu idioma na página.
+        </p>
+        <div class="link-list link-list-1 link-list-long-border bottom-0">
+            <a href="main.html"><img src="images/flags/United-States.png"><span>English</span><i
+                    class="fa fa-angle-right"></i></a>
+            <a href="#"><img src="images/flags/Portugal.png"><span>Portuguese</span><i
+                    class="fa fa-angle-right"></i></a>
         </div>
+        <div class="divider top-25 bottom-0"></div>
+        <div class="link-list link-list-1">
+            <a href="profile.html">
+                <i class="toggle-icon round-tiny fa fa-user bg-green2-dark color-white"></i>
+                <span>Perfil</span>
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+        <!-- <div class="clear"></div> -->
     </div>
+</div>
 
     <div class="menu-hider"></div>
 </div>
@@ -165,7 +176,7 @@
                         response[i].restaurant.featured_image + `" alt="img"> <h1>` +
                         response[i].restaurant.name + `</h1> <p>` + response[i].restaurant
                             .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[
-                                i].restaurant.id + `">VIEW</a> </div>`);
+                                i].restaurant.id + `">VER</a> </div>`);
                 }
             }
         });
@@ -197,7 +208,7 @@
                                 `" alt="img"> <h1>` + response[i].restaurant.name +
                                 `</h1> <p>` + response[i].restaurant.cuisines +
                                 `</p> <a href="#" class="bg-highlight" id="` +
-                                response[i].restaurant.id + `">VIEW</a> </div>`);
+                                response[i].restaurant.id + `">VER</a> </div>`);
                         }
                     }
 
