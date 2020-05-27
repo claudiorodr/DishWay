@@ -61,7 +61,8 @@
                                 <div class="divider clear bottom-15"></div>
                                 <div class="one-half">
                                     <strong class="color-theme">Date:</strong>
-                                    <p class="font-12 bottom-15"><i class="far fa-calendar right-5"></i>15 August 2025
+                                    <p class="font-12 bottom-15"><i class="far fa-calendar right-5"></i>` + response[i]
+                                        .date + `
                                     </p>
                                 </div>
                                 <div class="one-half last-column">
@@ -79,14 +80,9 @@
                                     <div class="user-group-title">
                                         <h5 class="color-theme bolder bottom-0">This reservation has ` +
                             response[i].number_guests + ` guests</h5>
-                                        <p class="under-heading font-10 color-highlight bottom-15">John, Jack, Jason and
-                                            Joe and 16
-                                            others</p>
+
                                     </div>
-                                        <div class="user-group-users">
-                                            <img class="shadow-large" src="images/pictures/faces/2s.png">
-                                            <div class="clear"></div>
-                                        </div>
+
                                     <div class="clear"></div>
                                 </div>
                                 <span href="#" id="button` + i + `" restaurant_id="` + response[i]._id + `"
