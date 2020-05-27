@@ -67,7 +67,7 @@
                         }
 
                         if (result.restaurant.highlights.includes(
-                                "Air Conditioning")) {
+                            "Air Conditioning")) {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Air Conditioning</span><strong>This restaurant has air conditioning!</strong><em class="color-green1-dark">Air conditioning</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
@@ -85,10 +85,10 @@
                                     ' <a class="default-link" data-lightbox="gallery-1" href="' +
                                     result.restaurant.photos[i].photo.url +
                                     '" title="' + result.restaurant
-                                    .name + '"><img src="' +
+                                        .name + '"><img src="' +
                                     result.restaurant.photos[i].photo.thumb_url +
                                     '" data-src="' + result.restaurant.photos[i].photo
-                                    .thumb_url +
+                                        .thumb_url +
                                     '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
                                 )
                             }
@@ -100,10 +100,10 @@
                                     '" title="' + result.name +
                                     '"><img src="' +
                                     result.restaurant.photos[i].photo
-                                    .thumb_url +
+                                        .thumb_url +
                                     '" data-src="' + result.restaurant.photos[i]
-                                    .photo
-                                    .thumb_url +
+                                        .photo
+                                        .thumb_url +
                                     '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
                                 )
                             }
@@ -125,20 +125,28 @@
 
                             $('#stars').append('<div class="review-stars">')
                             for (i = 0; i < parseInt(result.restaurant.user_rating
-                                    .aggregate_rating); i++) {
+                                .aggregate_rating); i++) {
                                 $('#stars').append(
                                     '<i class="fa fa-star color-yellow1-dark font-18"></i>'
                                 )
                             }
                             for (i = 0; i < 5 - parseInt(result.restaurant
-                                    .user_rating
-                                    .aggregate_rating); i++) {
+                                .user_rating
+                                .aggregate_rating); i++) {
                                 $('#stars').append(
                                     '<i class="far fa-star color-yellow1-dark font-18"></i>'
                                 )
                             }
                             $('#stars').append('</div>')
                         }
+
+                        const reviews = ["We thoroughly enjoyed the full tasting menu. Every single course was beautifully presented and filled with a wonderful depth and complexity of flavors. The service was outstanding! This is by far one of my best restaurant experiences.", "We have stayed in amazing restaurant several times and it never disappoints. The food is excellent and wine choice huge.", "Friendly and attentive staff. Well thought-out and executed menu. Instead of choosing a bottle from the extensive and amazing wine list , one may opt to go through the by-the-glass list for variety and experience.",];
+                        const names_reviews = ["Miguel Correia", "Morgan Freeman", "Justin Timberlake", "John Etecetra"]
+                        
+                        const randomNumber = Math.floor(Math.random() * 4) + 1
+                        const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+
+
 
                         $('.bg-29').css('background-image', 'url("' + result
                             .restaurant
@@ -152,12 +160,16 @@
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
                         $("#book").attr("href", "reservation.html?id=" + id);
                         $("#review").attr("href", "reviews.html?id=" + id);
+                        $("#image_review").attr("src", "images/pictures/faces/" + randomNumber + "s.png");
+                        $("#review_critic").text(randomReview)
+                        $("#name_review").text(names_reviews[randomNumber - 1])
+                        
                         //Falta alterar isto
                         for (i = 0; i < 2; i++) {
                             $('.content bottom-15 #review2').append(
                                 '<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +
                                 result.restaurant.all_reviews.reviews[i].review
-                                .critic + '</p></div>')
+                                    .critic + '</p></div>')
                         }
 
 
@@ -269,26 +281,25 @@
             </div>
         </div>
         <div class="content-boxed">
+            <h1 class="center-text under-heading uppercase bolder font-30 bottom-30">Reviews</h1>
+            <p class="center-text bottom-30">
+                <i class="fa fa-star color-yellow1-dark font-18 right-5"></i>
+                <i class="fa fa-star color-yellow1-dark font-24 right-5"></i>
+                <i class="fa fa-star color-yellow1-dark font-30"></i>
+                <i class="fa fa-star color-yellow1-dark font-24 left-5"></i>
+                <i class="fa fa-star color-yellow1-dark font-18 left-5"></i>
+            </p>
             <div class="content">
                 <div class="review-1">
-                    <em><img src="images/pictures/5t.jpg" alt="img"> John Doeson</em>
-                    <u class="opacity-50">21st October 2021</u>
-                    <strong class="regular-bold font-13">Absolutely gorgeous stuff!</strong>
-                    <span>
-                        <i class="fa fa-star color-yellow1-dark"></i>
-                        <i class="fa fa-star color-yellow1-dark"></i>
-                        <i class="fa fa-star color-yellow1-dark"></i>
-                        <i class="fa fa-star color-yellow1-dark"></i>
-                        <i class="fa fa-star color-yellow1-dark"></i>
-                    </span>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut ligula enim. Proin
-                        volutpat consectetur ipsum a imperdiet. Nulla elementum, lectus a sagittis venenatis, lacus
-                        justo pharetra velit, eget venenatis est felis eget mi. Donec tincidunt efficitur nulla, sed
-                        viverra mauris facilisis vitae.
-                    </p>
+                    <em><img id="image_review" src="images/pictures/5t.jpg" alt="img"><div id="name_review"></div></em>
+                    <u class="opacity-50">25th May 2020</u>
+                    <br>
+                    <br>
+                    <div id="review_critic"></div>
+                    <br>
                     <a href="#" id="review"
-                        class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">View More Reviews</a>
+                        class="button button-margins bg-highlight bg-yellow1-light round-small bottom-30 shadow-huge button-m button-full">View
+                        More Reviews</a>
                 </div>
             </div>
         </div>
@@ -321,24 +332,6 @@
             <div class="divider top-25 bottom-0"></div>
         </div>
     </div>
-    <!--     <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
-        data-menu-effect="menu-over">
-        <div class="content bottom-0">
-            <h1 class="uppercase ultrabold top-20">Select your language</h1>
-            <p class="font-11 under-heading bottom-20">
-                You can direct to multiple languages of your page.
-            </p>
-            <div class="link-list link-list-1 link-list-long-border bottom-0">
-                <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
-                        class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/India.png"><span>Indian</span><i class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/Germany.png"><span>German</span><i class="fa fa-angle-right"></i></a>
-                <a href="#"><img src="images/flags/Italy.png"><span>Italian</span><i class="fa fa-angle-right"></i></a>
-                <a href="#" class="no-border"><img src="images/flags/Spain.png"><span>Spanish</span><i
-                        class="fa fa-angle-right"></i></a>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div> -->
+
     <div class="menu-hider"></div>
 </div>
