@@ -66,7 +66,7 @@
                     <div class="search search-header">
                         <i class="fa fa-search"></i>
                         <input id="search" type="text" placeholder="What are you looking for?" data-search>
-                        <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark"></i></a>
+                        <a href="#" class="disabled"><i class="fa fa-times-circle color-red2-dark" id="delete"></i></a>
                     </div>
                 </div>
                 <div class="search-results disabled-search-list content-boxed shadow-large">
@@ -91,5 +91,160 @@
 
         </div>
 
+        <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="310"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <div class="menu-title">
+                <h1>Settings</h1>
+                <p class="color-highlight">Flexible and Easy to Use</p><a href="#" class="close-menu"><i
+                        class="fa fa-times"></i></a>
+            </div>
+            <div class="divider bottom-20"></div>
+            <div class="toggle-with-icon">
+                <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
+                <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
+                    data-toggle-width="50" data-toggle-content="toggle-content-1"
+                    data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
+                    <span class="color-theme regularbold font-13">Dark Mode</span>
+                    <strong></strong>
+                    <u></u>
+                </a>
+            </div>
+            <div class="divider top-25 bottom-0"></div>
+            <div class="link-list link-list-1">
+                <a href="#" data-menu="menu-language">
+                    <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
+                    <span>Language</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <h1 class="uppercase ultrabold top-20">Select your language</h1>
+            <p class="font-11 under-heading bottom-20">
+                You can direct to multiple languages of your page.
+            </p>
+            <div class="link-list link-list-1 link-list-long-border bottom-0">
+                <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="#"><img src="images/flags/India.png"><span>Indian</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="#"><img src="images/flags/Germany.png"><span>German</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="#"><img src="images/flags/Italy.png"><span>Italian</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="#" class="no-border"><img src="images/flags/Spain.png"><span>Spanish</span><i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
         <div class="menu-hider"></div>
     </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "get",
+                url: "http://127.0.0.1:3001/api/restaurants/list",
+                dataType: "json",
+                success: function (response) {
+
+                    for (let i = 0; i < response.length; i++) {
+                        if (!response[i].restaurant.featured_image) {
+                            response[i].restaurant.featured_image = "https://cdn1.vectorstock.com/i/1000x1000/02/25/restaurant-color-icon-vector-8500225.jpg"
+                        }
+                        $("#list").append(` <div data-filter-item data-filter-name="` + response[i]
+                            .restaurant.name.toLowerCase() +
+                            `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
+                            response[i].restaurant.featured_image + `" alt="img"> <h1>` +
+                            response[i].restaurant.name + `</h1> <p>` + response[i].restaurant
+                                .cuisines + `</p> <a href="#" class="bg-highlight" id="` + response[
+                                    i].restaurant.id + `">VIEW</a> </div>`);
+                    }
+                }
+            });
+
+            $(document).on('keypress', function (e) {
+                if (e.which == 13) {
+                    $.ajax({
+                        type: "get",
+                        url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                            "#search").val(),
+                        dataType: "json",
+                        success: function (response) {
+                            //$("#list").empty();
+                            //$("#list").hide();
+
+                            if ($(".search-result-list").prop('id') != "server_side") {
+                                $(".search-result-list").hide();
+                            }
+
+                            for (let i = 0; i < response.length; i++) {
+                                if (!response[i].restaurant.featured_image) {
+                                    response[i].restaurant.featured_image = "https://cdn1.vectorstock.com/i/1000x1000/02/25/restaurant-color-icon-vector-8500225.jpg"
+                                }
+                                $("#list").append(
+                                    ` <div id="server_side" data-filter-item data-filter-name="` +
+                                    response[i].restaurant.name.toLowerCase() +
+                                    `" class="search-result-list"> <img class="shadow-large image-resize" src="` +
+                                    response[i].restaurant.featured_image +
+                                    `" alt="img"> <h1>` + response[i].restaurant.name +
+                                    `</h1> <p>` + response[i].restaurant.cuisines +
+                                    `</p> <a href="#" class="bg-highlight" id="` +
+                                    response[i].restaurant.id + `">VIEW</a> </div>`);
+                            }
+                        });
+
+                    });
+                }
+            });
+
+            $("#delete").click(function (e) {
+                e.preventDefault();
+
+                //$("#list").empty();
+                //pesquisa();
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                        "#search").val(),
+                    dataType: "json",
+                    success: function () {
+                        //$("#list").empty();
+
+                        if ($(".search-result-list").is("#server_side")) {
+                            $('#server_side').remove();
+                        }
+
+                    }
+                });
+            });
+
+/*             $("#search").keypress(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "get",
+                    url: "http://127.0.0.1:3001/api/restaurants/search?search=" + $(
+                        "#search").val(),
+                    dataType: "json",
+                    success: function () {
+                        //$("#list").empty();
+
+                        
+
+                    }
+                });
+            }); */
+
+        });
+    </script>
+</body>
