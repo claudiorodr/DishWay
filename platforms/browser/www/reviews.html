@@ -53,7 +53,7 @@
                             $("#button").attr("disabled", true);
                             $.ajax({
                                 type: "get",
-                                url: "http://127.0.0.1:3001/api/restaurants/find/19356617",
+                                url: "http://127.0.0.1:3001/api/restaurants/find/" + id,
                                 dataType: "json",
                                 success: function (response) {
                                     $("#reviews").append(
