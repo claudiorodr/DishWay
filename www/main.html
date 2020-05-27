@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
-    
+
 <!-- Mirrored from www.enableds.com/products/stickymobile3/component-boxes-captions.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Feb 2020 22:22:13 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -10,7 +10,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>StickyMobile</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        media-src *; font-src 'self' https://fonts.gstatic.com;" />
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"> -->
+
+    <title>DISHWAY</title>
     <link
         href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&amp;display=swap"
         rel="stylesheet">
@@ -19,6 +24,11 @@
 
     <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
     <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
 </head>
 
 <body class="theme-light" data-background="none" data-highlight="red2">
@@ -29,85 +39,130 @@
             </div>
         </div>
         <div class="header header-fixed header-logo-center">
-            <a href="index.html" class="header-title">Sticky Mobile</a>
+            <a href="index.html" class="header-title">DishWay</a>
             <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
             <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
         </div>
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-            <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
-            <a href="index-components.html" class="active-nav"><i class="fa fa-star"></i><span>Features</span></a>
-            <a href="index-pages.html"><i class="fa fa-heart"></i><span>Pages</span></a>
-            <a href="index-search.html"><i class="fa fa-search"></i><span>Search</span></a>
-            <a href="#" data-menu="menu-settings"><i class="fa fa-cog"></i><span>Settings</span></a>
-            <div class="clear"></div>
+        <div id="footer"></div>
+        <script>
+            $("#footer").load("footer.html", function () {
+                $('div#footer a[href="main.html"]').addClass("active-nav");
+            });
+        </script>
+        <div class="page-content header-clear-medium">
+            <a href="restaurants.html?type=popular">
+                <div data-height="175" class="caption caption-margins round-medium shadow-large">
+                    <div class="caption-center right-20">
+                        <p class="text-right color-red1-dark bottom-0"><i class="fa fa-fire fa-3x"></i></p>
+                    </div>
+                    <div class="caption-center left-20">
+                        <h1 class="color-white bolder">Most popular</h1>
+                        <p class="under-heading color-white opacity-90 bottom-0">
+                            See the most trending restaurants.
+                        </p>
+                    </div>
+                    <div class="caption-overlay bg-black opacity-70"></div>
+                    <div class="caption-bg bg-29"></div>
+                </div>
+            </a>
+            <a href="restaurants.html?type=rating">
+                <div data-height="175" class="caption caption-margins round-medium shadow-large">
+                    <div class="caption-center left-20">
+                        <p class="text-left color-yellow1-dark bottom-0"><i class="fa fa-star fa-2x"></i></p>
+                    </div>
+                    <div class="caption-center right-20 text-right bottom-0">
+                        <h1 class="color-white bolder">Top rated</h1>
+                        <p class="under-heading color-white opacity-90 bottom-0">
+                            See the top rated restaurants.
+                        </p>
+                    </div>
+                    <div class="caption-overlay bg-black opacity-70"></div>
+                    <div class="caption-bg bg-3"></div>
+                </div>
+            </a>
+            <a href="restaurants.html?type=rating">
+                <div data-height="175" class="caption caption-margins round-medium shadow-large">
+                    <div class="caption-center text-center">
+                        <span class="text-center color-blue1-light"><i class="fa fa-city fa-2x"></i></span>
+                        <h1 class="color-white bolder">City</h1>
+                        <p class="under-heading color-white opacity-80 bottom-0">
+                            Find restaurants by city.
+                        </p>
+                    </div>
+                    <div class="caption-overlay bg-black opacity-80"></div>
+                    <div class="caption-bg bg-18"></div>
+                </div>
+            </a>
+            <a href="restaurants.html?type=price/1">
+                <div data-height="175" class="caption caption-margins round-medium shadow-large">
+                    <div class="caption-center text-center">
+                        <span class="text-center color-green1-dark"><i class="fa fa-search-dollar fa-3x"></i></span>
+                        <h1 class="color-white bolder">Cheap</h1>
+                        <p class="under-heading color-white opacity-80 bottom-0">
+                            Find the cheapest restaurants.
+                        </p>
+                    </div>
+                    <div class="caption-overlay bg-black opacity-80"></div>
+                    <div class="caption-bg bg-20"></div>
+                </div>
+            </a>
+
         </div>
-        <a class="page-content header-clear-medium" href="restaurants.html">
-            <div data-height="175" class="caption caption-margins round-medium shadow-large" >
-                <div class="caption-center right-20">
-                    <p class="text-right color-red1-dark bottom-0"><i class="fa fa-fire fa-3x"></i></p>
+
+        <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="310"
+            data-menu-effect="menu-over">
+            <div class="content bottom-0">
+                <div class="menu-title">
+                    <h1>Settings</h1>
+                    <p class="color-highlight">Flexible and Easy to Use</p><a href="#" class="close-menu"><i
+                            class="fa fa-times"></i></a>
                 </div>
-                <div class="caption-center left-20">
-                    <h1 class="color-white bolder">Most popular</h1>
-                    <p class="under-heading color-white opacity-90 bottom-0">
-                        See the most trending restaurants.
-                    </p>
+                <div class="divider bottom-20"></div>
+                <div class="toggle-with-icon">
+                    <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
+                    <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
+                        data-toggle-width="50" data-toggle-content="toggle-content-1"
+                        data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
+                        <span class="color-theme regularbold font-13">Dark Mode</span>
+                        <strong></strong>
+                        <u></u>
+                    </a>
                 </div>
-                <div class="caption-overlay bg-black opacity-70"></div>
-                <div class="caption-bg bg-29"></div>
+                <div class="divider top-25 bottom-0"></div>
+                <div class="link-list link-list-1">
+                    <a href="#" data-menu="menu-language">
+                        <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
+                        <span>Language</span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
             </div>
-            <div data-height="175" class="caption caption-margins round-medium shadow-large">
-                <div class="caption-center left-20">
-                    <p class="text-left color-yellow1-dark bottom-0"><i class="fa fa-star fa-2x"></i></p>
+        </div>
+
+        <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
+            data-menu-effect="menu-over">
+            <div class="content bottom-0">
+                <h1 class="uppercase ultrabold top-20">Select your language</h1>
+                <p class="font-11 under-heading bottom-20">
+                    You can direct to multiple languages of your page.
+                </p>
+                <div class="link-list link-list-1 link-list-long-border bottom-0">
+                    <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
+                            class="fa fa-angle-right"></i></a>
+                    <a href="index_pt.html"><img src="images/flags/Portugal.png"><span>Portuguese</span><i
+                            class="fa fa-angle-right"></i></a>
+                    <a href="#"><img src="images/flags/Germany.png"><span>German</span><i
+                            class="fa fa-angle-right"></i></a>
+                    <a href="#"><img src="images/flags/Italy.png"><span>Italian</span><i
+                            class="fa fa-angle-right"></i></a>
+                    <a href="#" class="no-border"><img src="images/flags/Spain.png"><span>Spanish</span><i
+                            class="fa fa-angle-right"></i></a>
                 </div>
-                <div class="caption-center right-20 text-right bottom-0">
-                    <h1 class="color-white bolder">Top rated</h1>
-                    <p class="under-heading color-white opacity-90 bottom-0">
-                        See the top rated restaurants.
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-70"></div>
-                <div class="caption-bg bg-3"></div>
+                <div class="clear"></div>
             </div>
-            <div data-height="175" class="caption caption-margins round-medium shadow-large">
-                <div class="caption-center text-center">
-                    <span class="text-center color-blue1-light"><i class="fa fa-city fa-2x"></i></span>
-                    <h1 class="color-white bolder">City</h1>
-                    <p class="under-heading color-white opacity-80 bottom-0">
-                        Find restaurants by city.
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-80"></div>
-                <div class="caption-bg bg-18"></div>
-            </div>
-            <div data-height="175" class="caption caption-margins round-medium shadow-large">
-                <div class="caption-center text-center">
-                    <span class="text-center color-blue1-dark"><i class="fa fa-eye fa-3x"></i></span>
-                    <h1 class="color-white bolder">Glasses</h1>
-                    <p class="under-heading color-white opacity-80 bottom-0">
-                        Oldschool are always beautiful.
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-80"></div>
-                <div class="caption-bg bg-20"></div>
-            </div>
-            <div data-height="175" class="caption caption-margins round-medium shadow-large">
-                div <div class="caption-top top-20 left-20">
-                    <p class="text-left color-red2-dark"><i class="fa fa-clock fa-2x"></i></p>
-                </div>
-                <div class="caption-bottom right-20 bottom-20 text-right">
-                    <h1 class="color-white bolder">Watch</h1>
-                    <p class="under-heading color-white opacity-80 bottom-0">
-                        New age or old school.
-                    </p>
-                </div>
-                <div class="caption-overlay bg-black opacity-80"></div>
-                <div class="caption-bg bg-28"></div>
-            </div>
-        </a>
+        </div>
 
         <div class="menu-hider"></div>
     </div>
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/plugins.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
+
 </body>
