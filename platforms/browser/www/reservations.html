@@ -50,12 +50,12 @@
                                     <h1 class="bolder">` + response[i].restaurant_name + `</h1>
                                     <p class="font-10 under-heading bottom-15"><i
                                             class="fa fa-map-marker-alt right-10"></i>` + response[i]
-                            .restaurant_address +
+                                .restaurant_address +
                             `
                                     </p>
                                 </div>
                                 <a href="restaurant.html?id=` + response[i].restaurant_id +
-                                `"
+                            `"
                                     class="button button-xs bg-highlight round-huge shadow-huge float-right font-11">View
                                     restaurant</a>
                                 <div class="divider clear bottom-15"></div>
@@ -67,7 +67,7 @@
                                 <div class="one-half last-column">
                                     <strong class="color-theme">Time:</strong>
                                     <p class="font-12 bottom-15"><i class="far fa-clock right-5"></i>` + response[i]
-                            .time + `</p>
+                                .time + `</p>
                                 </div>
                                 <div class="clear"></div>
                                 <div class="user-group">
@@ -125,7 +125,7 @@
                                             e.preventDefault();
                                             // location.reload();
                                             $("#" + parent_id)
-                                            .hide();
+                                                .hide();
                                         });
                                     },
                                     error: function (response) {
@@ -162,7 +162,61 @@
     <div class="page-content header-clear-large" id="reservations">
     </div>
 
+    <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="310"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <div class="menu-title">
+                <h1>Settings</h1>
+                <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            </div>
+            <div class="divider bottom-20"></div>
+            <div class="toggle-with-icon">
+                <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
+                <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
+                    data-toggle-width="50" data-toggle-content="toggle-content-1"
+                    data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
+                    <span class="color-theme regularbold font-13">Dark Mode</span>
+                    <strong></strong>
+                    <u></u>
+                </a>
+            </div>
+            <div class="divider top-25 bottom-0"></div>
+            <div class="link-list link-list-1">
+                <a href="#" data-menu="menu-language">
+                    <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
+                    <span>Language</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+            <div class="link-list link-list-1">
+                <a href="profile.html">
+                    <i class="toggle-icon round-tiny fa fa-user bg-green2-dark color-white"></i>
+                    <span>Profile</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <h1 class="uppercase ultrabold top-20">Select your language</h1>
+            <p class="font-11 under-heading bottom-20">
+                You can direct to multiple languages of your page.
+            </p>
+            <div class="link-list link-list-1 link-list-long-border bottom-0">
+                <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="main-pt.html"><img src="images/flags/Portugal.png"><span>Portuguese</span><i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
     <div class="menu-hider"></div>
+
     <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large" data-menu-height="320"
         data-menu-width="310" data-menu-effect="menu-over">
         <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>

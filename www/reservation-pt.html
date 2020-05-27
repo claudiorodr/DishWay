@@ -6,7 +6,7 @@
                 const urlParams = new URLSearchParams(queryString);
                 const id = urlParams.get('id')
                 $("#loader").hide();
-                $("#footer").load("footer.html");
+                $("#footer").load("footer-pt.html");
                 $("#button").on("click", function () {
                     $("#button").hide();
                     $("#loader").show();
@@ -50,8 +50,8 @@
         </div>
         <div id="footer"></div>
         <script>
-            $("#footer").load("footer.html", function () {
-                $('div#footer a[href="reservations.html"]').addClass("active-nav");
+            $("#footer").load("footer-pt.html", function () {
+                $('div#footer a[href="reservations-pt.html"]').addClass("active-nav");
             });
         </script>
         <div class="page-content header-clear-medium">

@@ -38,7 +38,7 @@
                             `</h3> <p class="font-10 under-heading bottom-15"><i class="fa fa-map-marker-alt right-8"></i>` +
                             response[i].restaurant.location.locality +
                             `</p> </div> <a href="restaurant.html?id=` + response[i].restaurant
-                            .id +
+                                .id +
                             `" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View restaurant</a> </div> </div>`
                         );
                     }
@@ -83,7 +83,7 @@
                                 response[i].restaurant.location.locality +
                                 `</p>
                                 </div> <a href="restaurant.html?id=` + response[i].restaurant
-                                .id +
+                                    .id +
                                 `" class="button button-xs bg-highlight round-huge shadow-huge float-right font-11 top-5">View
                                     restaurant</a> </div>
                                 </div>`
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    
+
     <div class="header header-fixed header-logo-center">
         <a href="index.html" class="header-title">DishWay</a>
         <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
@@ -113,15 +113,61 @@
         $("#footer").load("footer.html", function () {
             $('div#footer a[href="restaurants.html"]').addClass("active-nav");
         });
-        </script>
+    </script>
     <div class="page-content header-clear-medium" id="restaurants">
         <div class="preload-spinner3 border-highlight" id="loader2"></div>
         <span id="button"
-        class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
-        more restaurants</span>
+            class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Load
+            more restaurants</span>
         <div class="preload-spinner2 border-highlight" id="loader"></div>
     </div>
 
+    <div id="menu-settings" class="menu menu-box-bottom menu-box-detached round-large" data-menu-height="310"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <div class="menu-title">
+                <h1>Settings</h1>
+                <p class="color-highlight">Flexible and Easy to Use</p><a href="#" class="close-menu"><i
+                        class="fa fa-times"></i></a>
+            </div>
+            <div class="divider bottom-20"></div>
+            <div class="toggle-with-icon">
+                <i class="toggle-icon round-tiny fa fa-moon bg-red2-dark color-white"></i>
+                <a href="#" class="toggle-switch toggle-ios toggle-off" data-toggle-theme data-toggle-height="27"
+                    data-toggle-width="50" data-toggle-content="toggle-content-1"
+                    data-toggle-checkbox="toggle-checkbox-1" data-bg-on="bg-green1-dark" data-bg-off="">
+                    <span class="color-theme regularbold font-13">Dark Mode</span>
+                    <strong></strong>
+                    <u></u>
+                </a>
+            </div>
+            <div class="divider top-25 bottom-0"></div>
+            <div class="link-list link-list-1">
+                <a href="#" data-menu="menu-language">
+                    <i class="toggle-icon round-tiny fa fa-globe bg-blue2-dark color-white"></i>
+                    <span>Language</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
+    <div id="menu-language" class="menu menu-box-bottom menu-box-detached round-medium" data-menu-height="350"
+        data-menu-effect="menu-over">
+        <div class="content bottom-0">
+            <h1 class="uppercase ultrabold top-20">Select your language</h1>
+            <p class="font-11 under-heading bottom-20">
+                You can direct to multiple languages of your page.
+            </p>
+            <div class="link-list link-list-1 link-list-long-border bottom-0">
+                <a href="#"><img src="images/flags/United-States.png"><span>English</span><i
+                        class="fa fa-angle-right"></i></a>
+                <a href="#"><img src="images/flags/Portugal.png"><span>Portuguese</span><i
+                        class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
     <div class="menu-hider"></div>
+    
 </div>
