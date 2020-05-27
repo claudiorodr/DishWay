@@ -29,7 +29,7 @@
                         response[i].restaurant.location.address = response[i].restaurant.location
                             .address.substr(0, 56)
                         $('#restaurants').prepend(
-                            ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
+                            ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-star"></i>` + response[i].restaurant.user_rating.aggregate_rating + `<i class="left-15 far fa-comment"></i>` + response[i].restaurant.all_reviews_count + `</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
                             response[i].restaurant.location.address +
                             ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
                             response[i].restaurant.featured_image +
@@ -73,7 +73,7 @@
                             response[i].restaurant.location.address = response[i].restaurant
                                 .location.address.substr(0, 56)
                             $('#button').before(
-                                ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-calendar"></i> August 28 <i class="left-15 far fa-clock"></i> 09:00 PM</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
+                                ` <div class="content-boxed content-boxed-full"> <div data-height="200" class="caption  shadow-huge bottom-15" style="height: 200px;"> <div class="caption-bottom top-25 left-20"> <p class="color-white font-10 opacity-80 top-15 bottom-5"><i class="far fa-star"></i>` + response[i].restaurant.user_rating.aggregate_rating + `<i class="left-15 far fa-comment"></i>` + response[i].restaurant.all_reviews_count + `</p> <p class="under-heading color-white font-10 opacity-80"><i class="fa fa-map-marker-alt"></i>` +
                                 response[i].restaurant.location.address +
                                 ` </p> </div> <div class="caption-overlay bg-gradient opacity-90"></div> <div class="caption-bg bg-18" style="background-image: url('` +
                                 response[i].restaurant.featured_image +
