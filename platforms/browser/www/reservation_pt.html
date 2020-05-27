@@ -1,0 +1,115 @@
+    <div id="page">
+        <script>
+            $(document).ready(function () {
+                var storage = window.localStorage;
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const id = urlParams.get('id')
+                $("#loader").hide();
+                $("#footer").load("footer.html");
+                $("#button").on("click", function () {
+                    $("#button").hide();
+                    $("#loader").show();
+
+                    $.ajax({
+                        type: "post",
+                        url: "http://127.0.0.1:3001/api/reservations/new",
+                        data: {
+                            "user_id": storage.user_id,
+                            "restaurant_id": id,
+                            "restaurant_name": storage.restaurant_name,
+                            "restaurant_address": storage.restaurant_address,
+                            "number_guests": $("#number_guests option:selected").text(),
+                            "date": $("#date").val(),
+                            "time": $("#time").val()
+                        },
+                        // dataType: "json",
+                        success: function (response) {
+                            $("#loader").hide();
+                            $("#menu-success").addClass("menu-active");
+                        },
+                        error: function (response, error) {
+                            $("#loader").hide();
+                            $("#button").show();
+                            $("#menu-warning").addClass("menu-active");
+                            $("#error").text(response.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+        <div id="page-preloader">
+            <div class="loader-main">
+                <div class="preload-spinner border-highlight"></div>
+            </div>
+        </div>
+        <div class="header header-fixed header-logo-center">
+            <a href="index.html" class="header-title">DishWay</a>
+            <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+            <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
+        </div>
+        <div id="footer"></div>
+        <script>
+            $("#footer").load("footer.html", function () {
+                $('div#footer a[href="reservations.html"]').addClass("active-nav");
+            });
+        </script>
+        <div class="page-content header-clear-medium">
+            <div class="content-boxed">
+                <div class="content">
+                    <h3 class="bolder">Realizar reserva</h3>
+                    <p>
+                        Favor de insirir os seguintes detalhes relativamente a sua reserva.
+                    </p>
+                    <div class="input-style input-style-1 input-required">
+                        <span>Seleciona a hora da tua reserva</span>
+                        <em><i class="fa fa-angle-down"></i></em>
+                        <input type="date" id="date">
+                    </div>
+                    <div class="input-style input-style-1 input-required">
+                        <span>Seleciona a hora da sua reserva</span>
+                        <em><i class="fa fa-angle-down"></i></em>
+                        <input type="time" id="time">
+                    </div>
+                    <div class="input-style input-style-1 input-required">
+                        <span>Seleciona o número de pessoas</span>
+                        <em><i class="fa fa-angle-down"></i></em>
+                        <select id="number_guests">
+                            <option value="default" disabled selected>Número de pessoas </option>
+                            <option value="iOS">1</option>
+                            <option value="Linux">2</option>
+                            <option value="MacOS">3</option>
+                            <option value="Android">4</option>
+                            <option value="Windows">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <span id="button"
+                class="button button-margins bg-highlight round-small bottom-30 shadow-huge button-m button-full">Fazer Reserva</span>
+            <div class="preload-spinner2 border-highlight" id="loader"></div>
+
+        </div>
+
+        <div class="menu-hider"></div>
+        <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large"
+            data-menu-height="320" data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Reserva bem sucedida</h1>
+            <p class="boxed-text-large color-white">
+                Realizou uma reserva com sucesso!
+            </p>
+            <a href="main.html"
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+        </div>
+        <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
+            data-menu-width="310" data-menu-effect="menu-over">
+            <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
+            <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
+            <p class="boxed-text-large color-white" id="error">
+
+            </p>
+            <a href=""
+                class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Voltar atrás</a>
+        </div>
+    </div>

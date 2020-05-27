@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        media-src *; font-src 'self' https://fonts.gstatic.com;" />
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"> -->
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/framework.css">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+
+    <link rel="manifest" href="_manifest.json" data-pwa-version="set_by_pwa.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+</head>
+<div id="page">
+    <script>
+        $(document).ready(function () {
+            var storage = window.localStorage;
+
+
+            $.ajax({
+                type: "get",
+                url: "http://127.0.0.1:3001/api/reservations/user",
+                data: {
+                    "user_id": storage.user_id,
+                },
+                dataType: "json",
+                success: function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        $("#reservations").append(
+                            ` <div class="content-boxed content-boxed-full" id=` + i + ` >
+                            <div style="margin-bottom: 10px;"></div>
+                            <div class="content bottom-10">
+                                <div class="float-left">
+                                    <h1 class="bolder">` + response[i].restaurant_name + `</h1>
+                                    <p class="font-10 under-heading bottom-15"><i
+                                            class="fa fa-map-marker-alt right-10"></i>` + response[i]
+                            .restaurant_address +
+                            `
+                                    </p>
+                                </div>
+                                <a href="restaurant.html?id=` + response[i].restaurant_id +
+                                `"
+                                    class="button button-xs bg-highlight round-huge shadow-huge float-right font-11">View
+                                    restaurant</a>
+                                <div class="divider clear bottom-15"></div>
+                                <div class="one-half">
+                                    <strong class="color-theme">Date:</strong>
+                                    <p class="font-12 bottom-15"><i class="far fa-calendar right-5"></i>15 August 2025
+                                    </p>
+                                </div>
+                                <div class="one-half last-column">
+                                    <strong class="color-theme">Time:</strong>
+                                    <p class="font-12 bottom-15"><i class="far fa-clock right-5"></i>` + response[i]
+                            .time + `</p>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="user-group">
+                                    <div class="user-group-manager border-highlight">
+                                        <img class="shadow-large" src="images/pictures/faces/4s.png" alt="img">
+                                        <h4 class="color-theme">` + storage.user_name + `</h4>
+                                        <em class="color-highlight">Event Creator</em>
+                                    </div>
+                                    <div class="user-group-title">
+                                        <h5 class="color-theme bolder bottom-0">This reservation has ` +
+                            response[i].number_guests + ` guests</h5>
+                                        <p class="under-heading font-10 color-highlight bottom-15">John, Jack, Jason and
+                                            Joe and 16
+                                            others</p>
+                                    </div>
+                                        <div class="user-group-users">
+                                            <img class="shadow-large" src="images/pictures/faces/2s.png">
+                                            <div class="clear"></div>
+                                        </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <span href="#" id="button` + i + `" restaurant_id="` + response[i]._id + `"
+                                    class="delete button button-s button-full round-small shadow-huge bg-highlight">Cancel Reservation</span>
+                                    <div class="preload-spinner2 border-highlight" id="loader` + i + `"></div>
+
+                            </div>
+                        </div>`)
+                    }
+
+                    $("[id^=loader]").hide();
+                    $(".delete")
+                        .on("click", function () {
+                            var restaurant_id = $(this).attr("restaurant_id")
+                            var id = $(this).attr("id")
+                            var loader_id = id.replace(/[^\d.]/g, '')
+                            var parent_id = $(this).parent().parent().attr('id');
+
+                            $("#menu-confirm").addClass("menu-active");
+                            $("#yes").click(function (e) {
+                                $("#" + id).hide();
+                                e.preventDefault();
+                                $("#loader" + loader_id).show();
+                                $.ajax({
+                                    type: "delete",
+                                    url: "http://127.0.0.1:3001/api/reservations/delete",
+                                    data: {
+                                        "_id": restaurant_id
+                                    },
+                                    dataType: "json",
+                                    success: function (response) {
+                                        $("#loader").hide();
+                                        $("#menu-success").addClass(
+                                            "menu-active");
+                                        $("#ok").click(function (e) {
+                                            e.preventDefault();
+                                            // location.reload();
+                                            $("#" + parent_id)
+                                            .hide();
+                                        });
+                                    },
+                                    error: function (response) {
+                                        $("#loader").hide();
+                                        $("#button").show();
+                                        $("#menu-warning").addClass(
+                                            "menu-active");
+                                        $("#error").text(response
+                                            .responseText);
+                                    }
+                                });
+                            });
+                        });
+                }
+            });
+        });
+    </script>
+    <div id="page-preloader">
+        <div class="loader-main">
+            <div class="preload-spinner border-highlight"></div>
+        </div>
+    </div>
+    <div class="header header-fixed header-logo-center">
+        <a href="index.html" class="header-title">DishWay</a>
+        <a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+        <a href="#" data-toggle-theme-switch class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
+    </div>
+    <div id="footer"></div>
+    <script>
+        $("#footer").load("footer.html", function () {
+            $('div#footer a[href="reservations.html"]').addClass("active-nav");
+        });
+    </script>
+    <div class="page-content header-clear-large" id="reservations">
+    </div>
+
+    <div class="menu-hider"></div>
+    <div id="menu-success" class="menu menu-box-modal round-medium bg-green1-dark shadow-large" data-menu-height="320"
+        data-menu-width="310" data-menu-effect="menu-over">
+        <h1 class="center-text top-30"><i class="fa fa-3x fa-check-circle color-white"></i></h1>
+        <h1 class="center-text uppercase ultrabold top-30 color-white">Reservation cancelled</h1>
+        <p class="boxed-text-large color-white">
+            Your reservation has now been canceled
+        </p>
+        <a href="main.html" id="ok"
+            class="close-menu button button-center-medium button-s button-round-small bg-white color-black">OK!</a>
+    </div>
+    <div id="menu-warning" class="menu menu-box-modal round-medium bg-red2-dark shadow-large" data-menu-height="320"
+        data-menu-width="310" data-menu-effect="menu-over">
+        <h1 class="center-text top-30"><i class="fa fa-3x fa-times color-white"></i></h1>
+        <h1 class="center-text uppercase ultrabold top-30 color-white">Wooops!</h1>
+        <p class="boxed-text-large color-white" id="error">
+
+        </p>
+        <a href="" class="close-menu button button-center-medium button-s button-round-small bg-white color-black">Go
+            Back</a>
+    </div>
+    <div id="menu-confirm" class="menu menu-box-modal round-medium" data-menu-height="210" data-menu-width="310"
+        data-menu-effect="menu-over">
+        <h1 class="center-text uppercase ultrabold top-30">Are you sure?</h1>
+        <p class="boxed-text-large">
+            You can't undo this action.
+        </p>
+        <div class="content left-20 right-20">
+            <div class="one-half">
+                <a href="" id="yes"
+                    class="close-menu button button-center-large button-s shadow-large button-round-small bg-green1-dark">Accept</a>
+            </div>
+            <div class="one-half last-column">
+                <a href="#"
+                    class="close-menu button button-center-large button-s shadow-large button-round-small bg-red1-dark">REJECT</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
