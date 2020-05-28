@@ -67,7 +67,7 @@
                         }
 
                         if (result.restaurant.highlights.includes(
-                            "Air Conditioning")) {
+                                "Air Conditioning")) {
                             $('#info').append(
                                 '<div class="link-list link-list-3"><a href="#" class="round-small shadow-tiny"><i class="fas fa-thermometer-full color-orange-light"></i><span>Ar Condicionado</span><strong>Este restaurante possui ar condicionado!</strong><em class="color-red1-dark">Ar Condicionado</em><i class="fa fa-check-circle color-green1-dark"></i></a></div>'
                             )
@@ -77,36 +77,36 @@
                             )
                         }
 
-                        if (result.restaurant.photo_count < 10 && result.restaurant
-                            .photo_count > 0) {
-                            for (let i = 0; i < result.restaurant
-                                .photo_count; i++) {
-                                $('#photos').append(
-                                    ' <a class="default-link" data-lightbox="gallery-1" href="' +
-                                    result.restaurant.photos[i].photo.url +
-                                    '" title="' + result.restaurant
-                                        .name + '"><img src="' +
-                                    result.restaurant.photos[i].photo.thumb_url +
-                                    '" data-src="' + result.restaurant.photos[i].photo.thumb_url +
-                                    '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
-                                )
-                            }
-                        } else {
-                            for (let i = 0; i < 9; i++) {
-                                $('#photos').append(
-                                    ' <a class="default-link" data-lightbox="gallery-1" href="' +
-                                    result.restaurant.photos[i].photo.url +
-                                    '" title="' + result.name +
-                                    '"><img src="' +
-                                    result.restaurant.photos[i].photo
-                                        .thumb_url +
-                                    '" data-src="' + result.restaurant.photos[i]
-                                        .photo
-                                        .thumb_url +
-                                    '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
-                                )
+                        if (result.restaurant.hasOwnProperty('photos')) {
+
+                            if (result.restaurant.photos.length < 10 && result.restaurant
+                                .photos.length > 0) {
+                                for (let i = 0; i < result.restaurant.photos.length; i++) {
+                                    $('#photos').append(
+                                        ' <a class="default-link" data-lightbox="gallery-1" href="' +
+                                        result.restaurant.photos[i].photo.url +
+                                        '" title="' + result.restaurant.name +
+                                        '"><img src="' + result.restaurant.photos[i]
+                                        .photo.thumb_url + '" data-src="' +
+                                        result.restaurant.photos[i].photo.thumb_url +
+                                        '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
+                                    )
+                                }
+                            } else {
+                                for (let i = 0; i < 9; i++) {
+                                    $('#photos').append(
+                                        ' <a class="default-link" data-lightbox="gallery-1" href="' +
+                                        result.restaurant.photos[i].photo.url +
+                                        '" title="' + result.name + '"><img src="' +
+                                        result.restaurant.photos[i].photo.thumb_url +
+                                        '" data-src="' +
+                                        result.restaurant.photos[i].photo.thumb_url +
+                                        '" class="preload-image round-small shadow-huge responsive-image" alt="img"><div class="caption"><h4 class="bottom-0 color-theme">Messy Desk?</h4><p>Some may consider this to be a very messy desk.</p><div class="divider bottom-0"></div></div></a>'
+                                    )
+                                }
                             }
                         }
+
 
                         if (result.restaurant.user_rating.aggregate_rating == 0) {
                             $("#rating").text("N.A. / 5.0");
@@ -124,14 +124,14 @@
 
                             $('#stars').append('<div class="review-stars">')
                             for (i = 0; i < parseInt(result.restaurant.user_rating
-                                .aggregate_rating); i++) {
+                                    .aggregate_rating); i++) {
                                 $('#stars').append(
                                     '<i class="fa fa-star color-yellow1-dark font-18"></i>'
                                 )
                             }
                             for (i = 0; i < 5 - parseInt(result.restaurant
-                                .user_rating
-                                .aggregate_rating); i++) {
+                                    .user_rating
+                                    .aggregate_rating); i++) {
                                 $('#stars').append(
                                     '<i class="far fa-star color-yellow1-dark font-18"></i>'
                                 )
@@ -139,11 +139,18 @@
                             $('#stars').append('</div>')
                         }
 
-                        const reviews = ["We thoroughly enjoyed the full tasting menu. Every single course was beautifully presented and filled with a wonderful depth and complexity of flavors. The service was outstanding! This is by far one of my best restaurant experiences.", "We have stayed in amazing restaurant several times and it never disappoints. The food is excellent and wine choice huge.", "Friendly and attentive staff. Well thought-out and executed menu. Instead of choosing a bottle from the extensive and amazing wine list , one may opt to go through the by-the-glass list for variety and experience.",];
-                        const names_reviews = ["Miguel Correia", "Morgan Freeman", "Justin Timberlake", "John Etecetra"]
-                        
+                        const reviews = [
+                            "We thoroughly enjoyed the full tasting menu. Every single course was beautifully presented and filled with a wonderful depth and complexity of flavors. The service was outstanding! This is by far one of my best restaurant experiences.",
+                            "We have stayed in amazing restaurant several times and it never disappoints. The food is excellent and wine choice huge.",
+                            "Friendly and attentive staff. Well thought-out and executed menu. Instead of choosing a bottle from the extensive and amazing wine list , one may opt to go through the by-the-glass list for variety and experience.",
+                        ];
+                        const names_reviews = ["Miguel Correia", "Morgan Freeman",
+                            "Justin Timberlake", "John Etecetra"
+                        ]
+
                         const randomNumber = Math.floor(Math.random() * 4) + 1
-                        const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+                        const randomReview = reviews[Math.floor(Math.random() * reviews
+                            .length)];
 
                         $('.bg-29').css('background-image', 'url("' + result
                             .restaurant
@@ -157,17 +164,18 @@
                         // $('#reviews #review').append('<p id="review" class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant[0] + '</p>')
                         $("#book").attr("href", "reservation-pt.html?id=" + id);
                         $("#review").attr("href", "reviews-pt.html?id=" + id);
-                        $("#image_review").attr("src", "images/pictures/faces/" + randomNumber + "s.png");
+                        $("#image_review").attr("src", "images/pictures/faces/" +
+                            randomNumber + "s.png");
                         $("#review_critic").text(randomReview)
                         $("#name_review").text(names_reviews[randomNumber - 1])
 
                         //Falta alterar isto
-                        for (i = 0; i < 2; i++) {
-                            $('.content bottom-15 #review2').append(
-                                '<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +
-                                result.restaurant.all_reviews.reviews[i].review
-                                    .critic + '</p></div>')
-                        }
+                        // for (i = 0; i < 2; i++) {
+                        //     $('.content bottom-15 #review2').append(
+                        //         '<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' +
+                        //         result.restaurant.all_reviews.reviews[i].review
+                        //         .critic + '</p></div>')
+                        // }
 
 
                         //$('#review').append('<div><p class="font-18 thin center-text color-theme line-height-huge bottom-15">' + result.restaurant.all_reviews.reviews[0].review.critic + '</p></div>')
@@ -288,7 +296,9 @@
             </p>
             <div class="content">
                 <div class="review-1">
-                    <em><img id="image_review" src="images/pictures/5t.jpg" alt="img"><div id="name_review"></div></em>
+                    <em><img id="image_review" src="images/pictures/5t.jpg" alt="img">
+                        <div id="name_review"></div>
+                    </em>
                     <u class="opacity-50">25 de Maio de 2020</u>
                     <br>
                     <br>
