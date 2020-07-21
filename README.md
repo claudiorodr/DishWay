@@ -1,69 +1,44 @@
-# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
+# ![Node/Express/Mongoose Example App](dishway.png)
+# DishWay
 
-A PhoneGap Hello World template
+A mobile app for finding new restaurants and simplifying bookings.
 
-## Usage
-
-#### PhoneGap CLI
-
-The hello-world template is the default when you create a new application using the [phonegap-cli][phonegap-cli-url].
-
-    phonegap create my-app
-
-Create an app using this template specifically:
-
-    phonegap create my-app --template hello-world
-
-To see a list of other available PhoneGap templates:
-
-    phonegap template list
-
-## [config.xml][config-xml]
-
-#### android-minSdkVersion (Android only)
-
-Minimum SDK version supported on the target device. Maximum version is blank by default.
-
-This template sets the minimum to `14`.
-
-    <preference name="android-minSdkVersion" value="14" />
-
-#### &lt;access ...&gt; (All)
-
-This template defaults to wide open access.
-
-    <access origin="*" />
-
-It is strongly encouraged that you restrict access to external resources in your application before releasing to production.
-
-For more information on whitelist configuration, see the [Cordova Whitelist Guide][cordova-whitelist-guide] and the [Cordova Whitelist Plugin documentation][cordova-plugin-whitelist]
-
-## [www/index.html][index-html]
-
-#### Content Security Policy (CSP)
-
-The default CSP is similarly open:
-
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-
-Much like the access tag above, you are strongly encouraged to use a more restrictive CSP in production.
-
-A good starting point declaration might be:
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" />
-
-For more information on the Content Security Policy, see the [section on CSP in the Cordova Whitelist Plugin documentation][cordova-plugin-whitelist-csp].
-
-Another good resource for generating a good CSP declaration is [CSP is Awesome][csp-is-awesome]
+## Getting Started
 
 
-[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
-[cordova-app]: http://github.com/apache/cordova-app-hello-world
-[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world/badges/score.svg
-[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world
-[config-xml]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/config.xml
-[index-html]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/www/index.html
-[cordova-whitelist-guide]: https://cordova.apache.org/docs/en/dev/guide/appdev/whitelist/index.html
-[cordova-plugin-whitelist]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist
-[cordova-plugin-whitelist-csp]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist#content-security-policy
-[csp-is-awesome]: http://cspisawesome.com
+To get the PhoneGap server running locally:
+
+- Clone this repo
+- `phonegap run` to install all required dependencies
+- Install MongoDB Community Edition ([instructions](https://docs.mongodb.com/manual/installation/#tutorials)) and run it by executing `mongod`
+- `phonegap serve` to start the local server
+
+## Dependencies
+
+- [expressjs](https://github.com/expressjs/express) - The server for handling and routing HTTP requests
+- [express-jwt](https://github.com/auth0/express-jwt) - Middleware for validating JWTs for authentication
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - For generating JWTs used by authentication
+- [mongoose](https://github.com/Automattic/mongoose) - For modeling and mapping MongoDB data to javascript 
+- [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator) - For handling unique validation errors in Mongoose. Mongoose only handles validation at the document level, so a unique index across a collection will throw an exception at the driver level. The `mongoose-unique-validator` plugin helps us by formatting the error like a normal mongoose `ValidationError`.
+- [passport](https://github.com/jaredhanson/passport) - For handling user authentication
+- [slug](https://github.com/dodo/node-slug) - For encoding titles into a URL-friendly format
+
+## Application Structure
+
+- `app.js` - The entry point to our application. This file defines our express server and connects it to MongoDB using mongoose. It also requires the routes and models we'll be using in the application.
+- `config/` - This folder contains configuration for passport as well as a central location for configuration/environment variables.
+- `routes/` - This folder contains the route definitions for our API.
+- `models/` - This folder contains the schema definitions for our Mongoose models.
+
+
+
+## Authors
+
+* **Cláudio Rodrigues** - *Full Stack* - [My profile](https://github.com/claudiorodr)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+# ![Node/Express/Mongoose Example App](dishway-showcase.png)
+
